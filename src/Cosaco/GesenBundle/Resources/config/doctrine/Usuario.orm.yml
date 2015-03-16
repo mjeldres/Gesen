@@ -1,0 +1,73 @@
+Cosaco\GesenBundle\Entity\Usuario:
+    type: entity
+    table: usuario
+    uniqueConstraints:
+        cu_personal:
+            columns:
+                - nombres
+                - apellidos
+        user_UNIQUE:
+            columns:
+                - user
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cargo:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            default: Profesor
+        nombres:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: 'Nombres del personal'
+        apellidos:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: 'Apellido Paterno del personal.'
+        user:
+            type: string
+            nullable: false
+            length: 25
+            fixed: false
+            comment: ''
+        userpw:
+            type: string
+            nullable: false
+            length: 40
+            fixed: false
+            comment: ''
+        roles:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            default: ROLE_USER
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Contiene la fecha de ingreso del personal al sistema.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+        estado:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Permite Activar o desactivar un personal en el sistema.'
+            default: a
+    lifecycleCallbacks: {  }

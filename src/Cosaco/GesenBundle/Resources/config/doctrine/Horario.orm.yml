@@ -1,0 +1,35 @@
+Cosaco\GesenBundle\Entity\Horario:
+    type: entity
+    table: horario
+    uniqueConstraints:
+        cu_horario_academ:
+            columns:
+                - hora_inicio
+                - hora_termino
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        horaInicio:
+            type: time
+            nullable: false
+            comment: 'Inicio de una hora académica.'
+            column: hora_inicio
+        horaTermino:
+            type: time
+            nullable: false
+            comment: 'Hora de termino de un horario académico.'
+            column: hora_termino
+        bloqueId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Bloque al que pertenece la hora.'
+            column: bloque_id
+    lifecycleCallbacks: {  }

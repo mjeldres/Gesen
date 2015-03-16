@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <title>{% block title %}Bienvenido a Gesen{% endblock %}</title>
+
+{% block stylesheets %}
+        <!-- hojas de estilo -->
+        <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/gesen.css') }}">
+{% endblock %}    
+{% block javascripts %}
+    
+        <!-- java script -->
+        <script src="{{ asset('js/jquery-1.11.2.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
+        <script>var obtenerRuta=function(ruta) {var path;switch(ruta){case 'horario':path='{{ path('_horario', {'id_dep':'0000', 'fecha':'0000'}) }}';break;case 'home_horario':path='{{ path('_home_horario') }}';break;case 'login':path='{{ path('gsn_login') }}';break; case 'logout':path='{{ path('gsn_logout') }}';break;}return path;}</script> 
+        <script src="{{ asset('js/gesen.js') }}"></script>{% endblock %}
+    </head>
+    
+<body>
+{% block body %}{% endblock %}
+</body>
+</html>

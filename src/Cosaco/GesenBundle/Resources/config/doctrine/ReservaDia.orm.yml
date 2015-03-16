@@ -1,0 +1,53 @@
+Cosaco\GesenBundle\Entity\ReservaDia:
+    type: entity
+    table: reserva_dia
+    indexes:
+        fk_reserva_dia_reserva1_idx:
+            columns:
+                - reserva_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        actividadReserva:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: 'Contiene actividades que se realizarán en una reserva agrupada por día.'
+            column: actividad_reserva
+        observacionReserva:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+            column: observacion_reserva
+        chequeoReserva:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+            column: chequeo_reserva
+        fechaActualizacion:
+            type: datetime
+            nullable: true
+            comment: 'Fecha de ingreso a la reserva del día actual.'
+            column: fecha_actualizacion
+    manyToOne:
+        reserva:
+            targetEntity: Reserva
+            cascade: ['persist']
+            mappedBy: null
+            inversedBy: dias
+            joinColumns:
+                reserva_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

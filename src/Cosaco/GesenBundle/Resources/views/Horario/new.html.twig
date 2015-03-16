@@ -1,0 +1,748 @@
+
+{# {% form_theme form 'bootstrap_3_layout.html.twig' %} #}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+
+{% block body %}
+
+    
+   {# {{ form_row(form.asignatura, {'attr':{'class': 'foo'}}) }} #}
+   
+  {# {{ form(form) }} #}
+   
+ {# {{ dump(form.vars.value.reservaDia) }} #}
+  
+ 
+   
+   
+   
+
+
+
+          
+       <div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+      
+<div role="tabpanel" class="tab-pane active" id="home">
+    
+    
+    {{ form_start(form, {'attr' : {'id' : 'gsn-form-editar-reserva'} }) }}
+    {{ form_errors(form) }}
+    
+    <div class="form-group gsn-tipo-reserva-cmb">
+        {# {{ form_label(form.tipoReserva) }} #}
+        {{ form_label(form.tipoReserva, "Reserva: ") }}
+        {{ form_errors(form.tipoReserva) }}
+        <div class="col-sm-10">{{ form_widget(form.tipoReserva) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group gsn-option gsn-asignatura-cmb">
+        {{ form_label(form.asignatura) }}
+        {{ form_errors(form.asignatura) }}
+        <div class="col-sm-10">{{ form_widget(form.asignatura) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group gsn-option gsn-taller-cmb">
+        {{ form_label(form.taller) }}
+        {{ form_errors(form.taller) }}
+        <div class="col-sm-10">{{ form_widget(form.taller) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group gsn-option gsn-curso-cmb">
+        {{ form_label(form.curso) }}
+        {{ form_errors(form.curso) }}
+        <div class="col-sm-10">{{ form_widget(form.curso) }}</div>
+        <div class="clearfix"></div>
+    </div>
+      
+    <div class="form-group">
+        {{ form_label(form.dias[0].actividadReserva) }}
+        {{ form_errors(form.dias[0].actividadReserva) }}
+        <div class="col-sm-10">{{ form_widget(form.dias[0].actividadReserva) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dias[0].observacionReserva) }}
+        {{ form_errors(form.dias[0].observacionReserva) }}
+        <div class="col-sm-10">{{ form_widget(form.dias[0].observacionReserva) }}</div>
+        <div class="clearfix"></div>
+    </div>     
+           
+    {{ form_rest(form) }}
+        {{ form_end(form) }}
+          
+          
+      </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+
+        
+             <script>
+                 
+    $('document').ready(function(){
+        
+        function guardarReserva(form) {
+                               
+            var values=[];
+            
+            $.each(form.serializeArray(), function(i, field){
+                values[field.name]=field.value;
+            });
+            
+            console.log(values);
+            
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serializeArray(),
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                }
+                });
+            
+        }
+        
+        
+        $('#gsn-form-editar-reserva').submit(function(ev){
+            
+            ev.preventDefault();
+            
+ console.log("btn-guardar");
+            guardarReserva($(this));
+            
+            
+        });
+        
+        
+        
+    });             
+                 
+                 
+      
+    $(function(){
+                       
+                $('.gsn-dragging-reservas').bonsai({
+                    expandAll: false,
+                    checkboxes: true, // depends on jquery.qubit plugin
+                    createCheckboxes: true // takes values from data-name and data-value, and data-name is inherited
+                });
+    });
+            
+
+            
+        $('document').ready(function(){
+                
+                
+                
+            var removerObjs=function(contenedor,estado) {
+  
+                var labs=contenedor.children("li");                   
+
+                var depCount=labs.length;
+
+                // Limpiamos dependencias
+                for(var l=0; l<depCount; l++) {
+                    var lab=$(labs[l]);
+                    var dias=lab.children("ol").children("li");
+
+                    // Limpiamos dias
+                    for (var d=0; d<dias.length; d++) {
+                        var dia=$(dias[d]);
+                        var bloques=dia.children("ol").children("li");
+
+                        // Limpiamos bloques
+                        for(var b=0; b<bloques.length; b++) {
+                            var bloque=$(bloques[b]);
+
+                            if(bloque.children("input").prop("checked")===estado) bloque.remove();
+                        }
+
+                        if(dia.children("ol").children("li").length===0) dia.remove();
+                    }
+
+                    if(lab.children("ol").children("li").length===0) lab.remove();
+                }
+                
+                contenedor.actualizarBadge();
+
+            }
+            
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                $('.gsn-dragging-reservas').draggable({
+                   helper:'clone',
+                   stack:'.gsn-dragging-reservas',
+                   appendTo: 'parent',
+                   cursorAt: { top: 5, left: 5},
+                   stop: function(){
+                       $('.gsn-dragging-reservas').bonsai('update');
+                   },
+                   start: function(ev,ui){
+                     /*
+                      * Quitamos elementos no seleccionados 
+                      */  
+                     removerObjs(ui.helper,false);
+{#                       var tv=ui.helper;           
+                       var labs=tv.children("li");                   
+                       
+                       var depCount=labs.length;
+                       
+                       // Limpiamos dependencias
+                        for(var l=0; l<depCount; l++) {
+                            var lab=$(labs[l]);
+                            var dias=lab.children("ol").children("li");
+
+                            // Limpiamos dias
+                            for (var d=0; d<dias.length; d++) {
+                                var dia=$(dias[d]);
+                                var bloques=dia.children("ol").children("li");
+
+                                // Limpiamos bloques
+                                for(var b=0; b<bloques.length; b++) {
+                                    var bloque=$(bloques[b]);
+
+                                    if(!bloque.children("input").prop("checked")) bloque.remove();
+                                }
+
+                                if(dia.children("ol").children("li").length===0) dia.remove();
+                            }
+
+                            if(lab.children("ol").children("li").length===0) lab.remove();
+                        } #}
+                       
+
+                        {#                       
+                        var btmp=ui.helper;           
+                        var bloques=btmp.find('.gsn-chkbox-nivel3');
+
+                        for(var b=0; b<bloques.length; b++) {
+                        var bloque=bloques[b];
+                        var chkBloque=$(bloque).children('input').prop("checked");
+
+                        if(!chkBloque) {
+                           // Buscamos root
+                           //var =$(bloque).parent();
+                        //   console.log($(bloque).closest('.gsn-chkbox-nivel2').data());
+                           $(bloque).remove();
+
+                        }
+                        }
+                        #}
+                    
+        
+                    
+                   }
+                });
+                
+                $.fn.agregarOrdenado=function(bloque,attrDatos){
+                
+                    var objs=this.children('li');
+                    var objsCount=objs.length;
+
+                    for (var i=0; i<objsCount; i++) {
+                        var obj=$(objs[i]);
+
+                        if(bloque.data(attrDatos)<obj.data(attrDatos)) {
+
+                            bloque.insertBefore(obj);
+                            break;
+                        }
+
+
+                        if(bloque.data(attrDatos)>obj.data(attrDatos)) {
+
+                            bloque.insertAfter(obj);
+
+                        }
+
+                    }
+                }
+                
+                $.fn.actualizarBadge=function(){
+                    var contObjs=this.find('.gsn-chkbox-nivel2');
+                    
+                    for(var i=0; i<contObjs.length; i++) {
+                        var obj=$(contObjs[i]).children('ol').children('li');
+                        $(contObjs[i]).find('.badge').text(obj.length);
+                    }
+                }
+                
+                $('.gsn-reservas-edicion>.panel-body').droppable({
+                    accept: ".gsn-dragging-reservas",
+                    drop: function(ev,ui){
+                        
+                        // Invalidamos el dropbox en caso de que arrastremos sobre el mismo bloque
+                        if($(ui.draggable).attr('id')===$(ev.target).children('ol').attr('id')) return;
+                        
+                        /*
+                         * Registramos los elementos al mover las reservas
+                         * Manteniendo la estructura del treeview
+                         */
+
+                        var rootObjDst=$(this).children("ol");
+                        var rootObj=$(ui.helper).clone();                    
+                        var objs=rootObj.find('.gsn-chkbox-nivel3');
+                        
+                        for(var i=0; i<objs.length; i++) {
+                           var obj=$(objs[i]);
+                           var dia=obj.closest(".gsn-chkbox-nivel2");
+                           var dep=obj.closest(".gsn-chkbox-nivel1");
+                           var depDst=rootObjDst.children('li[data-iddep='+dep.data('iddep')+']');
+                           
+                           if(depDst.length===0) {
+                               rootObjDst.append(dep);                               
+                           } 
+                           else {
+                               
+                               var diaDst=depDst.children("ol").children('li[data-iddia="'+dia.data('iddia')+'"]');
+                               
+                               if(diaDst.length===0) {
+                                   depDst.children('ol').agregarOrdenado(dia,'iddia');
+       
+                               } else {
+                                   
+                                    var objDst=diaDst.children("ol").children('li[data-idbloque='+obj.data('idbloque')+']');
+                                    if(objDst.length===0) diaDst.children('ol').agregarOrdenado(obj,'idbloque');
+                               }                        
+                                 
+                           }
+                            
+                        }
+                            // Desseleccionamos controles
+                            rootObjDst.find('input').attr('checked',false);
+                            
+                            // Quitamos horas del control que inició el evento
+                            removerObjs(ui.draggable,true);
+                            
+                            // Actualizamos cantidad de horas por dia
+                            rootObjDst.actualizarBadge();
+                    }
+                    
+                });               
+                
+            });
+            
+                            
+    var ocultarCampos=function(reset) {
+
+        var selItem=$('.gsn-tipo-reserva-cmb>div>select').val();
+
+        // if(!reset) $(".gsn-option>select").prop("selectedIndex",0);
+        $('.gsn-option').hide();
+
+        switch(selItem) {
+            case 'Curricular':
+
+                $('.gsn-asignatura-cmb').show();
+                $('.gsn-curso-cmb').show();
+                break;
+
+            case 'Taller':
+
+                $('.gsn-taller-cmb').show();
+                break;
+        }
+    }
+                
+                
+    $(document).ready(function(){
+
+        ocultarCampos(true);
+        $('.gsn-tipo-reserva-cmb>div>select').change(ocultarCampos);
+console.log($('.gsn-tipo-reserva-cmb>div>select').val());
+    });
+              
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </script>        
+
+        <div class="row">
+
+<div id="col-left" class="col-xs-6">
+<div  id="gsn-reservas-nuevas" class="gsn-reservas-edicion panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Horas disponibles</h3>
+  </div>
+  <div class="panel-body"  style="overflow-y: scroll; height: 200px;">
+     
+<ol id="gsn-lista-reservas-nuevas" class="gsn-dragging-reservas">
+    <li class='gsn-chkbox-nivel1 expanded' data-iddep='1'>
+        <span> </span><span class="glyphicon glyphicon-home"></span><span> Enlaces</span>
+    <ol>
+        <li class="gsn-chkbox-nivel2" data-iddia="20150323">
+            <span> </span><span class="glyphicon glyphicon-calendar"></span><span> 23/03/2015 </span><span class="badge">2</span>
+            <ol>
+                <li class="gsn-chkbox-nivel3" data-idbloque="1" data-checked='1'>
+                    <span> </span><span class="glyphicon glyphicon-time"></span><span> 8:30 - 9:15</span></li>
+                <li class="gsn-chkbox-nivel3" data-idbloque="2" data-checked='1'>
+                    <span> </span><span class="glyphicon glyphicon-time"></span><span> 9:15 - 10:00</span></li>
+            </ol>
+        </li>
+        <li class="gsn-chkbox-nivel2" data-iddia="20150312">
+            <span> </span><span class="glyphicon glyphicon-remove-circle"></span><span> 12/03/2015 </span><span class="badge">2</span>
+            <ol>
+                <li class="gsn-chkbox-nivel3" data-idbloque="1" data-checked='1'>
+                    <span> </span><span class="glyphicon glyphicon-time"></span><span> 8:30 - 9:15</span></li>
+                <li class="gsn-chkbox-nivel3" data-idbloque="2" data-checked='1'>9:15 - 10:00</li>
+            </ol>
+        </li>
+        <li class="gsn-chkbox-nivel2" data-iddia="20150319">
+        <span> </span><span class="glyphicon glyphicon-remove-circle"></span><span> 19/03/2015 </span><span class="badge">2</span>
+            <ol>
+                <li class="gsn-chkbox-nivel3" data-idbloque="2" data-checked='1'>9:15 - 10:00</li>
+            </ol>
+        </li>
+    </ol>
+    </li>
+</ol>
+      
+      
+      
+  </div>
+</div>            
+
+        </div>
+            
+<div id="col-right" class="col-xs-6">
+<div id="gsn-reservas-registradas" class="gsn-reservas-edicion panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Horas registradas</h3>
+  </div>
+  <div class="panel-body" style="overflow-y: scroll; height: 200px;">
+
+<ol id="gsn-lista-reservas-registradas" class="gsn-dragging-reservas">
+
+        <li class='gsn-chkbox-nivel1 expanded' data-iddep='2'>Basica
+    <ol>
+        <li class="gsn-chkbox-nivel2" data-iddia="20150319">
+            <span> </span><span class="glyphicon glyphicon-remove-circle"></span><span> 19/03/2015 </span><span class="badge">2</span>
+            <ol>
+                <li class="gsn-chkbox-nivel3" data-idbloque="3" data-checked='1'>10:20 - 10:55</li>
+                <li class="gsn-chkbox-nivel3" data-idbloque="4" data-checked='1'>10:55 - 11:50</li>
+            </ol>
+        </li>
+        <li class="gsn-chkbox-nivel2" data-iddia="20150323">
+        <span> </span><span class="glyphicon glyphicon-remove-circle"></span><span> 23/03/2015 </span><span class="badge">2</span>
+            <ol>
+                <li class="gsn-chkbox-nivel3" data-idbloque="2" data-checked='1'>9:15 - 10:00</li>
+            </ol>
+        </li>
+    </ol>
+    </li>
+    
+    
+</ol> 
+      
+  
+      
+      
+      
+      
+ 
+      
+      
+      
+      
+      
+      
+  </div>    
+      
+  </div>
+</div>              
+            
+        </div>  
+            
+            
+       
+            
+           <style>
+               
+               .bonsai,
+.bonsai li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  min-width: 200px !important;
+  
+}
+.bonsai label {
+    margin-bottom:0 !important;
+}
+
+.bonsai li {
+  position: relative;
+  padding-left: 1.3em; /* padding for the thumb */
+}
+
+li .thumb {
+  margin: -1px 0 0 -1em; /* negative margin into the padding of the li */
+  position: absolute;
+  cursor: pointer;
+}
+
+li.has-children > .thumb:after {
+  content: '▸';
+}
+
+li.has-children.expanded > .thumb:after {
+  content: '▾';
+}
+
+li.collapsed > ol.bonsai {
+  height: 0;
+  overflow: hidden;
+}
+
+.bonsai .all,
+.bonsai .none {
+  cursor: pointer;
+}
+               
+               
+           </style>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+         
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+  </div>
+
+</div>   
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+          
+          
+          
+    
+    
+
+          
+          
+          
+          
+          
+          
+          
+          
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+          
+
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+     
+
+        
+{% endblock %}

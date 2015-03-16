@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <title>{% block title %}Bienvenido a Gesen{% endblock %}</title>
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    
+{% endblock %}   
+{% block javascripts %}
+    <script src="{{ asset('js/bootstrap.js') }}"></script>
+{% endblock %}
+    </head>
+    <body>
+        
+
+<nav class="navbar navbar-default navbar-gesen navbar-fixed-top">
+    <div class="container-fluid">
+
+        <!-- titulo -->
+        <div class="navbar-header">
+            <a class="navbar-brand navbar-brand-gesen" href="#"><span>Gesen v1</span></a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <!-- menu izquierda -->
+            <ul class="nav navbar-nav navbar-left navbar-gesen-menu hidden-sm" style="display:inline; text-align: center;">
+                <li class="btn btn-xs btn-danger" style=""><a href="#">Dashboard</a></li>
+                <li class="btn btn-xs btn-danger" style=""><a href="#">Settings</a></li>
+                <li class="btn btn-xs btn-danger" style=""><a href="#">Profile</a></li>
+                <li class="btn btn-xs btn-danger" style=""><a href="#">Help</a></li>
+            </ul>  
+
+            <!-- menu derecha -->
+            <ul class="nav navbar-nav navbar-gesen-menu pull-right">
+                <li class="dropdown btn btn-xs btn-danger">
+                <a href="#" class="gsn-dropdown-login" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span> Login</span></a>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu" style="padding:0; margin:0;border:none; background:none; background:none;">
+                    
+                        <!--formulario inicio sesion -->    
+                        <div class="panel panel-default" style="width:300px !important; padding:0; margin:0;border:none; background-color:#ccc; ">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Inicio de sesión</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form  action="{{ path('gsn_login_check') }}" method="post">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon primary"><span class="glyphicon glyphicon-user"></span></span>
+                                                <input class="form-control" placeholder="Usuario" name="_username" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon primary"><span class="glyphicon glyphicon-lock"></span></span>
+                                                <input class="form-control" placeholder="Contraseña" name="_password" type="password" />
+                                            </div>
+                                        </div>
+                                        <div class="checkbox">
+                                        <label>
+                                        <input name="remember" type="checkbox" value=""> Mantener sesión abierta
+                                        </label>
+                                        </div>
+                                        <button id="gsn-btn-login" class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                                    
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+        
+        
+                                    <script>
+                                        $(document).ready(function(){
+                                            
+                                        $("gsn-btn-login").click(function(ev){
+                                            ev.preventDefault();
+                                            
+                                        url='{{ path('_cargar_reservas') }}';
+
+                                        var ajaxState=$.ajax({
+                                        type: "POST",
+                                        url: url,
+                                        dataType: "json",
+                                        data: {'dependencia': dep, 'fecha': fechaSeg},
+                                        success: function(data) {
+
+                                            console.log(data);
+
+
+                                            var reservas=data['reservas'];
+
+                                            for(var i=0; i<reservas.length; i++) {
+                                                var reserva=reservas[i];
+                                                var fReserva=reserva.fecha.date;
+
+                                                var col=moment(fReserva).format("d");
+
+                                                $('.gsn-calendario-datos').fnGenBloquesReserva(parseInt(reserva.id),  parseInt(reserva.bmin), parseInt(reserva.bmax), parseInt(col));
+                                            }
+
+                                        }
+                                        }).done(function(){
+                                        // Remover
+                                        $(".gsn-loader").remove();
+
+                                        });
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                        });    
+                                            
+                                            
+                                            
+                                            
+                                        });
+                                        
+                                        
+                                        
+                                    </script>      
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            
+            <div class="gesen-logo"><img src="{{ asset('img/cosaco_md.png') }}" /></div>   
+            
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+          
+          
+        {% block body %}{% endblock %}
+
+          
+          
+          
+          
+          
+          
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+cosaco_gesen_reservas_dia:
+    resource: "@CosacoGesenBundle/Resources/config/routing/reservadia.yml"
+    prefix:   /reservas_dia
+
+cosaco_gesen_reservas:
+    resource: "@CosacoGesenBundle/Resources/config/routing/reserva.yml"
+    prefix:   /reservas
+
+gsn_login_check:
+    path: /login_check
+    defaults: { _controller: CosacoGesenBundle:Seguridad:loginCheck }
+    
+gsn_login:
+    path: /login
+    defaults: { _controller: CosacoGesenBundle:Seguridad:login }
+    
+gsn_logout:
+    path: /logout
+    defaults: { _controller: CosacoGesenBundle:Seguridad:logout}
+
+_home_page:
+    path:     /
+    defaults: { _controller: CosacoGesenBundle:Horario:horarioIndex }
+
+_horario:
+    path: /horario/{id_dep}/{fecha}
+    defaults: { _controller: CosacoGesenBundle:Horario:show, id_dep:null, fecha:null}
+    requirements:
+        id_dep: \d+
+        fecha: \d+
+        
+_home_horario:
+    path: /horario/
+    defaults: { _controller: CosacoGesenBundle:Horario:horarioIndex }    
+    
+_horario_cargar:
+    path: /horario/cargar
+    defaults: { _controller: CosacoGesenBundle:Horario:load }
+    requirements: { _method: post }
+
+_horario_nueva_reserva:
+    path: /horario/nueva
+    defaults: { _controller: CosacoGesenBundle:Horario:new }
+    
+_horario_crear_reserva:
+    path: /horario/crear
+    defaults: { _controller: CosacoGesenBundle:Horario:crear }

@@ -1,0 +1,38 @@
+Cosaco\GesenBundle\Entity\CategoriaHw:
+    type: entity
+    table: categoria_hw
+    uniqueConstraints:
+        cu_cathw:
+            columns:
+                - nombre
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 80
+            fixed: false
+            comment: 'Nombre de la categoria de dispositivos.'
+        cantidadHw:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Número máximo de dispositivos por cada computador.'
+            column: cantidad_hw
+        unidadHw:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Unidad de medida para los dispositivos, en el caso de monitores(pulgadas), memorias (MB), tarjetas de red(Mb/s)'
+            default: N/D
+            column: unidad_hw
+    lifecycleCallbacks: {  }

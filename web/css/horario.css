@@ -1,0 +1,330 @@
+.ui-datepicker {
+    font-size:0.9em !important;
+}
+
+#gsn-loader-reserva { 
+    z-index:1000;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background-color: #fff;
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* IE8 o + */
+}
+#gsn-loader-reserva-ani {
+    z-index:1001;
+    background: transparent url("../img/loaderv2.gif") no-repeat center center;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+
+#gsn-contenedor {
+    position:relative;
+    display:block;
+    margin: 0 auto;
+    min-width:270px !important;
+}
+#gsn-calendario {
+    position:relative;
+}
+#gsn-calendario-panel {
+    position:relative;
+}
+#gsn-calendario-header {}
+#gsn-calendario-titulo {}
+#gsn-calendario-body {
+    position: relative;
+    display:block;
+    z-index:1 !important;
+    width: 100% !important;
+}
+
+#gsn-calendario-body table {
+    width:100%;
+    margin-bottom:0!important;
+    background:none!important;
+    border:none !important;
+}
+#gsn-calendario-body>table>thead>tr {
+    border:none !important;
+    border-top:1px solid #ddd !important;
+}
+#gsn-calendario-body>table>td {
+    border:none !important;   
+}
+
+#gsn-calendario-encabezado {
+    position:relative;
+    display:block;
+    border:none !important;
+    box-sizing: content-box;
+}
+#gsn-calendario-encabezado table {
+    border:none !important;
+    margin:0!important;
+    width:100% !important;
+    table-layout:fixed !important;
+}
+#gsn-calendario-encabezado table tr {
+    border:none !important;
+}
+#gsn-calendario-encabezado table th {
+    border-top:none !important;
+    border-bottom:none !important;
+    border-left:none !important;
+    text-align: center;
+}
+.gsn-calendario-separador {
+    display:block;
+    border: 1px solid #ddd;
+    border-bottom:none !important;
+    height:4px;
+    margin:0!important;
+    background-color: #f5f5f5 !important;
+}
+#gsn-calendario-contenido {
+    position:relative;
+    display:block;
+    z-index:14;
+    overflow-y: scroll;
+    height:402px;
+}
+#gsn-calendario-grid {
+    position:relative;
+    display:block;
+    z-index:16;
+}
+
+.gsn-calendario-def-columna {
+    width:50px!important;
+    text-align:right;
+}
+.gsn-calendario-def-fila {
+    height:40px;
+}
+.gsn-calendario-bg {
+    position:absolute;
+    display:block;
+    z-index:18;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+}
+.gsn-calendario-bg table  {
+    height:100%;
+    position:relative;
+    margin:0!important;
+    border:none!important;
+
+}
+.gsn-calendario-bg table td {  
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right:1px solid #ddd !important;  
+    height:100%;
+    padding:0!important;
+}
+.gsn-calendario-filas {
+    position: relative;
+    display:block;
+    z-index:20;
+}
+.gsn-calendario-filas table {
+    height:100% !important;
+    border:none !important;
+}
+.gsn-calendario-filas table td {
+    border:none !important;
+    background:none !important;
+}
+.gsn-calendario-filas table tr {
+    border-left:none !important;
+    border-right:none !important;
+}
+.gsn-calendario-style-fil{
+    border-top: 1px solid #ddd !important;
+}
+.gsn-calendario-style-alt{
+    border-top: 1px dotted #ddd !important;
+}
+.gsn-calendario-columnas {
+    position:absolute;
+    display:block;
+    top:0;
+    left:0;
+    right:0;
+    display:block;
+    z-index:22;
+}
+.gsn-calendario-columnas table {
+    height:100%!important;
+    margin:0 !important;
+    border:none !important;
+}
+.gsn-calendario-columnas table td {
+    padding:0 !important;
+    border:none !important;
+    height:100%!important;
+}
+.gsn-calendario-datos {
+    height: 0 !important;
+}
+.gsn-calendario-datos table {
+    height: 0 !important;
+}
+.gsn-calendario-datos td {
+    height: 0 !important;
+}
+
+.gsn-calendario-helper {
+    bottom:0;
+}
+.gsn-calendario-helper table {
+    height:100% !important;
+}
+.gsn-calendario-helper table td {
+    height:100% !important;
+}
+
+.gsn-calendario-dia {
+    position: relative;
+    display: block;
+    height: 100%;
+    margin: 0 2px;
+    padding:0;
+    z-index:30 !important;
+}
+
+/*
+* BLOQUE PARA REPRESENTAR UNA RESERVA
+*/
+
+.gsn-calendario-bloque {
+    display: block;
+    position:absolute;
+    width: 100%;
+    z-index:32 !important;
+    margin:0;
+    padding:0;
+    height:100%;  
+}
+.gsn-calendario-bloque a:hover {
+    text-decoration: none;
+}
+.gsn-calendario-bloque div {
+    margin:0;
+    padding:0;
+    overflow: hidden;
+}
+.gsn-calendario-bloque-res {
+    position:relative !important;
+    display:block !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.gsn-calendario-bloque-res-header {
+    position:relative !important;
+    height:36px !important;
+    line-height: 36px;
+    white-space: nowrap;
+}
+/*
+* Metodo1 para centrar verticalmente los cursos
+* Usando posicion absoluta y modificando la posicion con Transform
+*/
+/*.gsn-calendario-bloque-res-body {
+    position: absolute;
+    top:37px;
+    bottom:0;
+    left:0;
+    right:0;
+}
+.gsn-calendario-bloque-res-body-cont {
+    position:absolute;
+    top:50%;
+    left:0;
+    right:0;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    color: #777 !important;
+}*/
+
+/*
+* Metodo2 para centrar verticalmente los cursos
+* Usando display flex y align-items
+*/
+.gsn-calendario-bloque-res-body {
+    position: absolute !important;
+    top:37px;
+    bottom:0;
+    left:0;
+    right:0;
+    display:flex !important;
+    align-items: center;
+}
+.gsn-calendario-bloque-res-body-cont {
+    position:relative !important;
+    width:100% !important;
+    color: #777 !important;
+    
+}
+
+.gsn-calendario-bloque-res-body-cont-nivel {}
+.gsn-calendario-bloque-res-body-cont-grado {}
+
+.gsn-calendario-bloque-contenido-2h .gsn-calendario-bloque-res-body-cont-nivel::before {
+    content: ' ';
+}
+.gsn-calendario-bloque-contenido-3h .gsn-calendario-bloque-res-body-cont-nivel {
+    display:block;
+}
+.gsn-calendario-bloque-contenido-2h .gsn-calendario-bloque-res-body-cont-nivel {
+
+}
+.gsn-control-redimen-box {
+    height:6px;
+    width:100%;
+    display:block !important;
+    color:#333; 
+    z-index:34 !important;
+}
+.gsn-control-redimen-sup {
+    margin-top:1px !important;
+    top:0 !important;
+    position: absolute !important;
+    vertical-align:top;
+}
+.gsn-control-redimen-inf {
+    margin-bottom:2px !important;
+    bottom:0 !important;
+    position: absolute !important;
+    vertical-align:bottom;
+}
+.gsn-btn-redimen {
+    font-size:12px;
+    line-height:6px;
+    position:relative !important;
+    display:block;
+    text-align:center;
+}
+
+
+
+
+.ui-selectable-helper { display:none; }    
+.ui-selecting { background: #FECA40; }    
+.ui-selected { background: #F39814; color: white; }
+
+
+
+
+
+

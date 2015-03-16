@@ -1,0 +1,37 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1 class="title">Login</h1>
+
+{# src/Acme/SecurityBundle/Resources/views/Security/login.html.twig #}
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+
+<form action="{{ path('gsn_login_check') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+
+    {#
+        Si deseas controlar la URL a la que rediriges al
+        usuario en caso de éxito (más detalles abajo)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+    
+</form>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+{% endblock %}
+
+{# {% set code = code(_self) %} #}

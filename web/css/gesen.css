@@ -1,0 +1,388 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07-03-2015, 9:43:00
+    Author     : mjeldres
+*/
+
+.input-group-addon.primary {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(50, 118, 177) !important;
+    border-color: rgb(40, 94, 142) !important;
+}
+.input-group-addon.success {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(92, 184, 92) !important;
+    border-color: rgb(76, 174, 76) !important;
+}
+.input-group-addon.info {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(57, 179, 215) !important;
+    border-color: rgb(38, 154, 188) !important;
+}
+.input-group-addon.warning {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(240, 173, 78) !important;
+    border-color: rgb(238, 162, 54) !important;
+}
+.input-group-addon.danger {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(217, 83, 79) !important;
+    border-color: rgb(212, 63, 58) !important;
+}
+
+
+
+#gsn-btn-nav-menu {
+    background-color: #f5f5f5 !important;
+}
+
+
+#gsn-nav {
+    background-image: -webkit-linear-gradient(top, #d9534f 0%, #c12e2a 100%);
+    background-image: -o-linear-gradient(top, #d9534f 0%, #c12e2a 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#c12e2a));
+    background-image: linear-gradient(to bottom, #d9534f 0%, #c12e2a 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d9534f', endColorstr='#c12e2a', GradientType=0);
+    filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);    
+    background-image: -webkit-gradient(top, #d9534f 0%, #c12e2a 100%);
+    border-color:#b92c28;
+    color: #fff;
+    background-color:#d43f3a;
+    border:1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    
+}
+
+.gsn-active {
+    background-color: #c9302c;
+    border-color: #ac2925;
+    outline:0;
+    -webkit-box-shadow: inset 0 3px 9px rgba(0, 0, 0, .25);
+    box-shadow: inset 0 3px 9px rgba(0, 0, 0, .25);
+}
+
+#gsn-nav .navbar-collapse {
+    border-color: #ac2925;
+}
+
+#gsn-nav .navbar-brand>strong{
+    color: #fff;
+    -webkit-box-shadow:none !important;
+    box-shadow: none !important;
+    font-size: 1.3em;
+}
+
+#gsn-nav ul>li>a {
+    border-left: 1px solid #ac2925;
+}
+#gsn-nav .dropdown-menu {
+    background-color:#d43f3a;
+}
+#gsn-nav .dropdown-menu li a {
+    border: none;
+    color: #fff;
+}
+
+#gsn-nav .dropdown-menu li a:hover {
+    color: #000;
+}
+
+
+#gsn-nav .dropdown-menu .divider {
+       background-color:#b92c28; 
+}
+
+#gsn-nav-menu li:hover {
+    /*background-color: #c9392c;*/
+    background-color: #c12e2a;
+    background-position: 0 -15px;
+    border-color: #ac9225;
+    text-decoration:none;
+}
+
+#gsn-nav-menu>ul>li>a {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .4);
+}
+
+#gsn-nav-menu .dropdown-menu a {
+    color: #333;
+}
+#gsn-nav-menu .dropdown>a {
+    background: none !important;
+    background-image:none !important;
+    -webkit-box-shadow:none !important;
+    box-shadow: none !important;
+}
+#gsn-nav-menu-sesion>.dropdown>.dropdown-menu {
+    margin:0 auto 0 !important;
+}
+#gsn-nav-menu-sesion>.dropdown>.dropdown-menu>.panel {
+    padding:0;
+    margin:0; 
+    border:none;
+    background:none; 
+}
+
+/*#gsn-nav-menu>#gsn-nav-menu-sesion>.dropdown>#gsn-nav-menu-form {
+    width:300px !important; 
+    padding:0; 
+    margin:0; 
+    background-color:#fff; 
+    background-color:#d43f3a;
+    border:1px solid #d43f3a;
+}*/
+
+#gsn-login-dropdown-panel {
+    position:relative;
+    width:300px !important; 
+    padding:0; 
+    margin:0 auto !important; 
+    background-color:#fff; 
+    background-color:#d43f3a;
+    border:1px solid #d43f3a;    
+}
+
+#gsn-login-dropdown-panel>.panel-body {
+    background-color:#d43f3a;
+}
+.gesen-logo {
+    text-align:center;
+    margin-bottom: 20px;
+    position:relative;
+    /* background: transparent url('../img/cosaco_md.png') no-repeat center center;  */
+   /* height: 160px; */
+}
+.gesen-logo img {
+    width:90%;
+}
+
+
+/*
+* 
+* Formulaio de login
+*
+*/
+.gsn-body {
+    position: absolute !important;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:flex !important;
+    align-items: center;
+}
+.gsn-intro-form-login {
+    position:relative;
+    margin: 0 auto;
+    
+}
+
+.btn {
+    white-space: normal !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.navbar-brand {
+    position:absolute;
+    width:100%;
+    left:0;
+    text-align:center;
+    margin:auto;
+}*/
+
+/*
+* Borramos borde dotted de botones al posicionarse sobre ellos
+*/
+/*.btn:focus, .btn.focus {
+    outline:none !important;
+    background-image: none;
+}
+
+.navbar-brand-gesen {
+    color:#fff !important;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .50) !important;
+ //   padding: 25px 15px !important;
+    font-size: 2em;
+}
+
+.navbar-gesen
+{
+ //   min-height: 70px !important;
+    background-image:-webkit-linear-gradient(top, #d9534f 0%, #c12e2a 100%);
+    background-image:-o-linear-gradient(top, #d9534f 0%, #c12e2a 100%);
+    background-image: linear-gradient(to bottom,#d9534f 0,#c12e2a 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d9534f', endColorstr='#c12e2a', GradientType=0);
+    filter:progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    background-color:#c12e2a;
+
+}
+.navbar-gesen-menu {
+    border-left: 1px solid #c12e2a !important;
+
+}
+.navbar-gesen-menu>li {
+//border-left: 1px solid #c12e2a !important;
+border-right: 1px solid #c12e2a !important;
+background:none;
+}
+
+.navbar-gesen-menu>li > a {
+    color:#fff !important;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .50) !important;
+ //   padding-top: 25px !important;
+ //   padding-bottom: 25px !important;
+      font-size: 1.25em;
+
+}
+
+
+
+.sidebar {
+  //  top: 71px !important;
+    background-color: #ddd;
+}
+.gesen-logo {
+    text-align:center;
+    margin-bottom: 20px;
+    position:relative;
+    background: transparent url('../img/cosaco_md.png') no-repeat center center; 
+    height: 160px; 
+}
+.gesen-logo img {
+    width:60%;
+}
+
+.gsn-dropdown-login>a {
+    background: none !important;
+    background-image:none !important;
+    -webkit-box-shadow:none !important;
+    box-shadow: none !important;
+}
+.gsn-dropdown-login>div {
+    padding:0;
+    margin:0; 
+    border:none;
+    background:none; 
+}
+.gsn-dropdown-login-panel {
+    width:300px !important; 
+    padding:0; 
+    margin:0; 
+    background-color:#ccc; 
+    border:1px solid #bbb;
+}
+
+
+.input-group-addon.primary {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(50, 118, 177) !important;
+    border-color: rgb(40, 94, 142) !important;
+}
+.input-group-addon.success {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(92, 184, 92) !important;
+    border-color: rgb(76, 174, 76) !important;
+}
+.input-group-addon.info {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(57, 179, 215) !important;
+    border-color: rgb(38, 154, 188) !important;
+}
+.input-group-addon.warning {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(240, 173, 78) !important;
+    border-color: rgb(238, 162, 54) !important;
+}
+.input-group-addon.danger {
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(217, 83, 79) !important;
+    border-color: rgb(212, 63, 58) !important;
+}
+
+
+* 
+* Formulaio de login
+*
+
+.gsn-login-form-contenedor {
+    position: absolute !important;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display:flex !important;
+    align-items: center;
+}
+.gsn-login-form-body {
+    position:relative;
+    margin: 0 auto;
+    
+}
+
+.btn {
+    white-space: normal !important;
+}*/

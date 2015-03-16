@@ -1,0 +1,45 @@
+Cosaco\GesenBundle\Entity\Asignatura:
+    type: entity
+    table: asignatura
+    uniqueConstraints:
+        cu_asignatura:
+            columns:
+                - nombre
+                - tipo
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 60
+            fixed: false
+            comment: 'Nombre de la asignatura, es posible registrar tambien talleres especificándolo en el campo tipoAsignatura.'
+        tipo:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            default: 'Plan Común'
+        estado:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Permite activar o desactivar el uso de una asignatura.'
+            default: a
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Fecha en que se registra la asignatura.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    lifecycleCallbacks: {  }

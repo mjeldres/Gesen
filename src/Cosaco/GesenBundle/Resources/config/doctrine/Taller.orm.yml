@@ -1,0 +1,31 @@
+Cosaco\GesenBundle\Entity\Taller:
+    type: entity
+    table: taller
+    uniqueConstraints:
+        nombre_taler_UNIQUE:
+            columns:
+                - nombre_taller
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombreTaller:
+            type: string
+            nullable: false
+            length: 45
+            fixed: false
+            comment: ''
+            column: nombre_taller
+        estado:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

@@ -1,0 +1,69 @@
+Cosaco\GesenBundle\Entity\ReservaHora:
+    type: entity
+    table: reserva_hora
+    indexes:
+        fk_reserva_hora_reserva_dia1_idx:
+            columns:
+                - reserva_dia_id
+        fk_reserva_hora_horario_academico1_idx:
+            columns:
+                - horario_id
+        fk_reserva_hora_dependencias1_idx:
+            columns:
+                - dependencia_id
+    uniqueConstraints:
+        cu_reserva_hora:
+            columns:
+                - dependencia_id
+                - horario_id
+                - fecha_reserva
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaReserva:
+            type: date
+            nullable: false
+            comment: 'Fecha de reserva del bloque.'
+            column: fecha_reserva
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Fecha en que se registra la hora actual en el sistema.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        dependencia:
+            targetEntity: Dependencia
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                dependencia_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        horario:
+            targetEntity: Horario
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                horario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        reservaDia:
+            targetEntity: ReservaDia
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                reserva_dia_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

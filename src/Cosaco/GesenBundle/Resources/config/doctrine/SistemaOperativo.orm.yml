@@ -1,0 +1,49 @@
+Cosaco\GesenBundle\Entity\SistemaOperativo:
+    type: entity
+    table: sistema_operativo
+    uniqueConstraints:
+        cu_SO:
+            columns:
+                - nombre
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        desarrollador:
+            type: string
+            nullable: false
+            length: 200
+            fixed: false
+            comment: ''
+        nombre:
+            type: string
+            nullable: false
+            length: 200
+            fixed: false
+            comment: 'Nombre del sistema operativo.'
+        version:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        servicePack:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            column: service_pack
+        arquitectura:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Arquitectura nativa del sistema operativo. Puede ser x86, x64 o ambas, en caso de que se disponga del mismo sistema para ambas plataformas.'
+            default: x32
+    lifecycleCallbacks: {  }

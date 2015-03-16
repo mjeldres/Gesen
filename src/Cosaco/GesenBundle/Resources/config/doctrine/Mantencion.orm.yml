@@ -1,0 +1,69 @@
+Cosaco\GesenBundle\Entity\Mantencion:
+    type: entity
+    table: mantencion
+    indexes:
+        fk_mantencion_pc_personal1_idx:
+            columns:
+                - usuario_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        tipoMantencion:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Establece categorías para clasificar las mantenciones mediante un campo enum.'
+            default: Preventiva
+            column: tipo_mantencion
+        ambitoMantencion:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            default: Software
+            column: ambito_mantencion
+        detalleDiagnostico:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Describe el problema o actividad a realizar.'
+            column: detalle_diagnostico
+        fechaDiagnostico:
+            type: datetime
+            nullable: false
+            comment: 'Fecha en que se realiza un determinado diagnóstico.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_diagnostico
+        detalleReparacion:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: 'Describe la activad realizada para solucionar el problema encontrado en el diagnóstico. Este campo puede quedar contener valores null ya que una reparación puede efectuarse después de insertar el registro en la tabla.'
+            column: detalle_reparacion
+        fechaReparacion:
+            type: datetime
+            nullable: true
+            comment: 'Registra la fecha en que se efectua la reparación. '
+            column: fecha_reparacion
+    manyToOne:
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

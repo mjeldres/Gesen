@@ -1,0 +1,78 @@
+Cosaco\GesenBundle\Entity\Reserva:
+    type: entity
+    table: reserva
+    indexes:
+        fk_reserva_personal1_idx:
+            columns:
+                - usuario_id
+        fk_reserva_asignatura1_idx:
+            columns:
+                - asignatura_id
+        fk_reserva_curso1:
+            columns:
+                - curso_id
+        fk_reserva_taller1:
+            columns:
+                - taller_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        tipoReserva:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+            default: Curricular
+            column: tipo_reserva
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Fecha de solicitud de la reserva.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        asignatura:
+            targetEntity: Asignatura
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                asignatura_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        curso:
+            targetEntity: Curso
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                curso_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        usuario:
+            targetEntity: Usuario
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuario_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        taller:
+            targetEntity: Taller
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                taller_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

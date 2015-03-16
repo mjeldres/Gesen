@@ -1,0 +1,64 @@
+Cosaco\GesenBundle\Entity\Dispositivo:
+    type: entity
+    table: dispositivo
+    indexes:
+        fk_dispositivo_categorias_dispositivo1_idx:
+            columns:
+                - categoria_hw_id
+        fk_dispositivo_fabricante1_idx:
+            columns:
+                - fabricante_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        modelo:
+            type: string
+            nullable: false
+            length: 80
+            fixed: false
+            comment: 'Registra el modelo del dispositivo.'
+        descripcion:
+            type: string
+            nullable: true
+            length: 250
+            fixed: false
+            comment: 'Campo opcional que proporciona información adicional sobre un dispositivo.'
+        capacidad:
+            type: decimal
+            nullable: true
+            precision: 10
+            scale: 2
+            comment: ''
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Fecha de ingreso del dispositivo al sistema.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        categoriaHw:
+            targetEntity: CategoriaHw
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                categoria_hw_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fabricante:
+            targetEntity: Fabricante
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fabricante_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,8 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+        <div class="gsn-body">
+                <div class="gsn-intro-form-login">{% block login %}{% include 'CosacoGesenBundle:Seguridad:login_form.html.twig' with {'error':error, 'last_username':last_username} %}{% endblock %}
+                </div>
+        </div>
+{% endblock %}

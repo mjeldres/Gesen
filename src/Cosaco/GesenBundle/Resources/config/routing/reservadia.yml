@@ -1,0 +1,30 @@
+reservas_dia:
+    path:     /
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:index" }
+
+reservas_dia_show:
+    path:     /{id}/show
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:show" }
+
+reservas_dia_new:
+    path:     /new
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:new" }
+
+reservas_dia_create:
+    path:     /create
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:create" }
+    requirements: { _method: post }
+
+reservas_dia_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:edit" }
+
+reservas_dia_update:
+    path:     /{id}/update
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:update" }
+    requirements: { _method: post|put }
+
+reservas_dia_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CosacoGesenBundle:ReservaDia:delete" }
+    requirements: { _method: post|delete }

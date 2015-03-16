@@ -1,0 +1,67 @@
+{% extends "CosacoGesenBundle::layout.html.twig" %}
+
+{# {% block title %}CosacoGesenBundle:Horario:Mostrar{% endblock %} #}
+
+
+{% block stylesheets %}
+{{ parent() }}        <link rel="stylesheet" href="{{ asset('css/smoothness/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/horario.css') }}">{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+        <script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/jquery.ui.touch-punch.js') }}"></script>
+        
+{% endblock %}
+{% block cont_derecha %} 
+        <div id="gsn-contenedor">
+            <h1 class="page-header">Horarios</h1>
+            <div id="gsn-calendario">
+                <div  id="gsn-calendario-panel" class="panel panel-default">
+                    <div id="gsn-calendario-header" class="panel-heading gsn-calendario-header-panel">
+                        <div class="btn-group" role="group">
+                            <button id="gsn-refrescar-btn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-primary" type="button" data-toggle="dropdown" aria-expanded="true">
+                                    <span class="gsn-dep-label">Laboratorio</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul id="gsn-cb-dependencias" class="dropdown-menu" role="menu">
+{% for dependencia in dependencias %}
+                                    <li data-depid="{{ dependencia.id }}"><a href="#">{{ dependencia.nombre}}</a></li>
+{% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btn-group pull-right gsn-fecha-group" role="group" aria-label="...">
+                            <button id="gsn-calendario-btn-dtp" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button>
+                            <button id="gsn-calendario-btn-ant" type="button" class="btn btn-default gsn-btn-fecha"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button>
+                            <button id="gsn-calendario-btn-hoy" type="button" class="btn btn-default hidden-xs gsn-btn-fecha">Hoy</button>
+                            <button id="gsn-calendario-btn-sig" type="button" class="btn btn-default gsn-btn-fecha"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                    <div id="gsn-calendario-titulo" class="panel-body text-center"><span class="h3"></span></div>
+                    <div id="gsn-calendario-body"></div><input type="hidden" id="gsn-calendario-dtp" value="">
+                </div>                    
+            </div>
+        </div>
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

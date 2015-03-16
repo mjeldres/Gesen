@@ -1,0 +1,58 @@
+Cosaco\GesenBundle\Entity\MantencionComputador:
+    type: entity
+    table: mantencion_computador
+    indexes:
+        fk_detalle_mantencion_pc_mantencion_pc1_idx:
+            columns:
+                - mantencion_id
+        fk_detalle_mantencion_pc_computador1_idx:
+            columns:
+                - computador_id
+    uniqueConstraints:
+        cu_det_mant_pc:
+            columns:
+                - mantencion_id
+                - computador_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        observacionMantencion:
+            type: string
+            nullable: true
+            length: 250
+            fixed: false
+            comment: 'Registra observaciones y comentarios adicionales de problemas detectados en un computador específico.'
+            column: observacion_mantencion
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Registra la fecha en que se efectua la reparación sobre un equipo específico.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        computador:
+            targetEntity: Computador
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                computador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        mantencion:
+            targetEntity: Mantencion
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                mantencion_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,46 @@
+Cosaco\GesenBundle\Entity\SoftwareComputador:
+    type: entity
+    table: software_computador
+    indexes:
+        idMainPc:
+            columns:
+                - computador_id
+        idMainSw:
+            columns:
+                - software_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: ''
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        computador:
+            targetEntity: Computador
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                computador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        software:
+            targetEntity: Software
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                software_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

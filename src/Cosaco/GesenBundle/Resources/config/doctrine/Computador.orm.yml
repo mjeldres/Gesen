@@ -1,0 +1,115 @@
+Cosaco\GesenBundle\Entity\Computador:
+    type: entity
+    table: computador
+    indexes:
+        fk_computador_sistema_operativo1_idx:
+            columns:
+                - sistema_operativo_id
+        fk_computador_fabricante1_idx:
+            columns:
+                - fabricante_id
+        fk_computador_dependencias1_idx:
+            columns:
+                - dependencia_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla.'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        plataforma:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Mediante un campo enum establece categorias para los computadores, agrupandolos por ejemplo en PC de escritorio, notebook, netbook, ultrabooks, etc.'
+        nombreEquipo:
+            type: string
+            nullable: false
+            length: 20
+            fixed: false
+            comment: 'Contiene el nombre de red para el equipo.'
+            column: nombre_equipo
+        direccionMac:
+            type: string
+            nullable: false
+            length: 12
+            fixed: true
+            comment: ''
+            column: direccion_mac
+        estado:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: 'Especifica mediante categoria el estado inicial del equipo (Nuevo, usado, reacondicionado).'
+            default: Bueno
+        origen:
+            type: string
+            nullable: true
+            length: 100
+            fixed: false
+            comment: 'Se debe especificar la procedencia del equipo (Sostenedor, Centro de padres, MINEDUC).'
+        modelo:
+            type: string
+            nullable: true
+            length: 30
+            fixed: false
+            comment: ''
+        numeroSerie:
+            type: string
+            nullable: true
+            length: 20
+            fixed: false
+            comment: 'En caso de existir, almacena el número de serie del equipo.'
+            column: numero_serie
+        observaciones:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: 'Registra observaciones adicionales y seguimientos efectuados al equipo.'
+        fechaIngreso:
+            type: date
+            nullable: false
+            comment: 'Fecha en que ingresa el equipo al departamento.'
+            column: fecha_ingreso
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Contiene la fecha en que se registra el equipo en el sistema'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        dependencia:
+            targetEntity: Dependencia
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                dependencia_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fabricante:
+            targetEntity: Fabricante
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fabricante_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        sistemaOperativo:
+            targetEntity: SistemaOperativo
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                sistema_operativo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

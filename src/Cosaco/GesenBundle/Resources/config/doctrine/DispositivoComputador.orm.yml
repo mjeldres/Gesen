@@ -1,0 +1,59 @@
+Cosaco\GesenBundle\Entity\DispositivoComputador:
+    type: entity
+    table: dispositivo_computador
+    indexes:
+        fk_detalle_dispositvo_pc_computador1_idx:
+            columns:
+                - computador_id
+        fk_detalle_dispositvo_pc_dispositivo1_idx:
+            columns:
+                - dispositivo_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: 'Clave primaria de la tabla'
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        numeroSerie:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: 'Número de serie de un dispositivo específico.'
+            column: numero_serie
+        observaciones:
+            type: string
+            nullable: true
+            length: 250
+            fixed: false
+            comment: 'Registra observaciones y problemas que presente el dispositivo'
+        fechaActualizacion:
+            type: datetime
+            nullable: false
+            comment: 'Fecha de instalación de del dispositivo en el equipo.'
+            default: CURRENT_TIMESTAMP
+            column: fecha_actualizacion
+    manyToOne:
+        computador:
+            targetEntity: Computador
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                computador_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        dispositivo:
+            targetEntity: Dispositivo
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                dispositivo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

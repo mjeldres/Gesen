@@ -1,0 +1,415 @@
+{% extends "CosacoGesenBundle::layout.html.twig" %}
+
+{# {% block title %}CosacoGesenBundle:Horario:Mostrar{% endblock %} #}
+
+
+{% block stylesheets %}
+{{ parent() }}        <link rel="stylesheet" href="{{ asset('css/smoothness/jquery-ui.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/horario.css') }}">{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+        <script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui.js') }}"></script>
+        <script src="{{ asset('js/jquery.ui.touch-punch.js') }}"></script>
+        <script src="{{ asset('js/jquery.qubit.js') }}"></script>
+        <script src="{{ asset('js/jquery.bonsai.js') }}"></script>
+        <script src="{{ asset('js/horario.js') }}"></script>
+        
+{% endblock %}
+{% block cont_derecha %} 
+        <div id="gsn-contenedor">
+            <h1 class="page-header">Horarios</h1>
+            <div id="gsn-calendario">
+                <div  id="gsn-calendario-panel" class="panel panel-default">
+                    <div id="gsn-calendario-header" class="panel-heading gsn-calendario-header-panel">
+                        <div class="btn-group" role="group">
+                            <button id="gsn-refrescar-btn" type="button" class="btn btn-default"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-primary" type="button" data-toggle="dropdown" aria-expanded="true">
+                                    <span class="gsn-dep-label">Laboratorio</span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul id="gsn-cb-dependencias" class="dropdown-menu" role="menu">
+{% for dependencia in dependencias %}
+                                    <li data-depid="{{ dependencia.id }}"><a href="#">{{ dependencia.nombre}}</a></li>
+{% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="btn-group pull-right gsn-fecha-group" role="group" aria-label="...">
+                            <button id="gsn-calendario-btn-dtp" type="button" class="btn btn-warning"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></button>
+                            <button id="gsn-calendario-btn-ant" type="button" class="btn btn-default gsn-btn-fecha"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></button>
+                            <button id="gsn-calendario-btn-hoy" type="button" class="btn btn-default hidden-xs gsn-btn-fecha">Hoy</button>
+                            <button id="gsn-calendario-btn-sig" type="button" class="btn btn-default gsn-btn-fecha"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
+                        </div>
+                    </div>
+                    <div id="gsn-calendario-titulo" class="panel-body text-center"><span class="h3"></span></div>
+                    <div id="gsn-calendario-body"></div><input type="hidden" id="gsn-calendario-dtp" value="">
+                </div>                    
+            </div>
+        </div>
+         
+       
+                                
+                                
+        <!-- Modal -->
+        <div class="modal fade" id="detalleReserva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar Reserva</h4>
+              </div>
+              <div class="modal-body" style="min-height: 200px;">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button id="gsn-btn-guardar-reserva" type="button" class="btn btn-success">Guardar</button>
+              </div>
+            
+            </div>
+          </div>
+        </div>                        
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+
+                                
+        <!-- tooltip editar reservas -->                        
+        <div class="bg-warning gsn-tooltip-reserva panel-default" style="top:0; left: -21px; position:absolute; border-radius:3px; width: 20px; height: 40px; border:1px solid #ccc; text-align:center;"><a class="gsn-editar-reserva" href="#"><span style="font-size: 0.9em;" class="glyphicon glyphicon-edit"></span></a><a href="#"><span style="font-size: 0.9em;" class="glyphicon glyphicon-remove"></span></a></div>   
+                                
+                                
+                                
+                                
+    <script>
+        
+        $('document').ready(function(){
+            
+            $('#gsn-btn-guardar-reserva').on('click', function(){
+                
+                $('#gsn-form-editar-reserva').submit();
+        
+                
+            });
+            
+            
+            
+        });
+        
+    var cargarCalendario=function(fecha, id_dep){
+        
+        /*
+         * Guardamos la fecha por defecto
+         * Debe estar en timestamp transormado a milisegundos,
+         * ya que el datepicker requiere este formato
+         */
+        $('#gsn-calendario-dtp').val(fecha);
+        
+        // Seleccionamos dependencia por defecto
+        var dep= $('#gsn-cb-dependencias>li[data-depid='+id_dep+']');
+        dep.addClass('active');
+        $('.gsn-calendario-header-panel .gsn-dep-label').html(dep.text());
+
+        /*
+         * Obtenemos el id del usuario logeado en el sistema
+         */
+        var id_user_act=parseInt($('.gsn-dropdown-user').data('user_id'));
+                    
+        /*
+         * fecha: primer dia de la semana
+         * id_dep: codigo de la dependencia a mostrar
+         */
+
+        var gsnBloques=[
+        {% for bloque in bloques %}
+        {'id':{{ bloque.id }}, 'binicio':'{{ bloque.horaInicio|date('H:i:s') }}', 'btermino':'{{ bloque.horaTermino|date('H:i:s') }}'},
+        {% endfor %}];
+
+        // Aviso en caso de que no se encuentren bloques horarios
+        if(gsnBloques.length===0) {
+            
+            var tipo_alerta, cuerpo, titulo, pie;
+            
+            tipo_alerta="warning";
+            cuerpo="<strong>Atención</strong> No se han encontrado rangos de tiempo válidos para la asignación de reservas.";
+            titulo="Falta ingresar los horarios";
+            pie='<button class="btn btn-danger" onclick="document.location.href=genRutaActual();">Reintentar</button>'
+            
+            // Mostramos errores de conexion
+            $('#gsn-calendario').msgBoxShow(
+                    tipo_alerta, 
+                    false, 
+                    cuerpo, 
+                    titulo,
+                    pie
+                    );
+
+            return false;
+        }
+
+        // Agregamos contenedores principales
+        var tbHorario=crearCalendario(gsnBloques,7);
+        $("#gsn-calendario-body").append(tbHorario);
+        
+        // Calculamos fecha actual, primer y ultimo dia semana
+        //var fecha=parseInt(moment().format("x"));
+ 
+        // $('#gsn-calendario-dtp').val(fecha);
+        
+
+
+        // Cargamos fechas de los días y titulo del horario
+        setHeaderCal(fecha);
+
+        // Ajustamos el margen izquierdo del header
+        ajustarScrollbar();
+
+        /*
+         * Desactivamos la selección con el mouse de los elementos del calendario
+         * Se cambia el contenedor a uno inferior 
+         * ya que se desahabilitan los botones superiores del horario
+         */
+        $('#gsn-calendario-body').disableSelection();
+
+        /*
+         * Activamos evento para agregar nuevos bloques 
+         * 
+         */
+        if(id_user_act>0) $(tbHorario).find('.gsn-calendario-filas').agregarNuevaReserva();
+        
+        /*
+         * Función para agregar los bloques horarios
+         */
+        cargarReservas();
+{#        if(agregarBloques && typeof(agregarBloques)==="function" && gsnBloques.length>0) {
+            agregarBloques(fecha);
+
+        }#}
+                                                    
+                                                    
+
+    }
+
+/*
+ *  Eventos que se ejecutan una vez que se ha cargado 
+ *  Completamente el DOM
+ */
+    $(document).ready(function(){
+
+        /*
+         * la función requiere el primer dia de la semana y el código de la dependencia
+         * Ambos parametros se pasan desde php
+         */
+        cargarCalendario({{ fecha }},{{ id_dep }});
+
+        // Inicializamos el calendario
+        $('#gsn-calendario-dtp').datepicker({
+            showAnim: "slideDown",
+            // dateFormat: "yy-mm-dd",
+            dateFormat: $.datepicker.TIMESTAMP,
+            beforeShow: function(ev,ui){
+                setTimeout(function(){
+                    var btn=$('.gsn-fecha-group'); // Basarse en la posicion del grupo de botones
+                //    var btn=$("#gsn-calendario-btn"); // basarse en la posicion del btn
+                    var p=btn.offset();
+                //    var pLeft=p.left; // Cuando alineamos el boton al a izquierda
+                    var pLeft=(p.left-ui.dpDiv.outerWidth(true))+btn.outerWidth(true);
+                    var pTop=p.top+btn.outerHeight(true)+2;
+                    ui.dpDiv.css({'left': pLeft, 'top': pTop});
+                    //console.log(pLeft);
+                },5);
+            }
+        });
+ 
+        // Eventos para mostrar y ocultar el datePicker
+        $("#gsn-calendario-btn-dtp").on('click', function(){ ($('#ui-datepicker-div').css('display')==='none')? $('#gsn-calendario-dtp').datepicker("show"):$('#gsn-calendario-dtp').datepicker("hide"); });
+   
+        // Habilitamos evento para aquellos objetos que varien su tamaño o posición al redimensionar
+        $(window).resize(function(ev){          
+
+            if(ev.target==window) {
+                // Ajustamos margen derecho del header para el scrollbar
+                ajustarScrollbar()
+
+                // Ocultamos datepicker
+                $('#gsn-calendario-dtp').datepicker("hide");
+            }
+
+        });
+
+        // Eventos para los botnes avanzar, retroceder y hoy de las fechas
+        
+
+       $('.gsn-btn-fecha').on('click', function(ev){
+           
+           ev.handle=true;
+
+            var sFechaAct=parseInt($('#gsn-calendario-dtp').val());
+            var fechaAct=moment(sFechaAct);
+
+            var fecha;
+
+            switch($(this).attr("id")) {
+                case 'gsn-calendario-btn-hoy':
+                    
+                    // Obtengo fecha actual, sin la hora actual (solo fecha)
+                    var fechahoy=moment().format('YYYY-MM-DD');
+                    
+                    // Transformo a timestap con miliseg
+                    fecha=moment(fechahoy);
+            
+                    break;
+                case 'gsn-calendario-btn-ant':
+                    fecha=fechaAct.subtract(7, 'days');
+                    break;
+                case 'gsn-calendario-btn-sig':
+                    fecha=fechaAct.add(7, 'days');
+                    break;
+                default:
+                    return false;
+            }
+          //  console.log(typeof(fecha.format('x')));
+            // Cargamos headers
+            var fechaInt=parseInt(fecha.format('x'));
+
+            /*
+             * En caso de estar ejecutando una tarea previa salgo
+             */
+            if($("#gsn-calendario-body").loaderAjax()) {
+                ev.stopImmediatePropagation();
+                return false;
+            }
+                                                                            
+            if(!ev.isImmediatePropagationStopped()) { 
+
+            // Cargamos titulos de los dias            
+            setHeaderCal(fechaInt);
+            
+            // Cargamos reservas de la semana seleccionada
+            cargarReservas();
+
+            }
+
+       });
+        
+        $('#gsn-calendario-dtp').datepicker('option', 'onSelect', function(fecha, inst) {
+            
+            var fechaInt=parseInt(fecha);
+            
+            // Cargamos titulos de los dias            
+            setHeaderCal(fechaInt);
+            
+            // Cargamos reservas de la semana seleccionada
+            cargarReservas();
+            
+            });
+            
+                    
+        // Evento que se dispara cuando se selecciona una dependencia    
+        $('#gsn-cb-dependencias>li').on('click', function(ev){
+            var obj=$(ev.currentTarget);
+
+            obj.parent().find('.active').removeClass('active');        
+            obj.addClass('active');
+
+            obj.closest('.btn-group')
+                    .find('.gsn-dep-label').text(obj.text())
+                    .end()
+                    .children('.dropdown-toogle')
+                    .dropdown('toggle');
+            
+            var fechaInt=parseInt( $('#gsn-calendario-dtp').val());
+            
+            // Cargamos titulos de los dias            
+            setHeaderCal(fechaInt);
+            
+            // Cargamos reservas de la semana seleccionada
+            cargarReservas();
+
+        });
+        
+        // Cargamos denuevo las reservas al pulsar en el boton refrescar
+        $("#gsn-refrescar-btn").click(function(){
+            
+        //    $(this).attr('disabled','disabled');
+            
+            cargarReservas();
+         
+        
+        });
+
+
+       $('#gsn-calendario-body').on('click', '.gsn-calendario-bloque', function(){
+            console.log($(this).data());
+        });
+
+    
+{#            $('#gsn-calendario-body').on('click', '.gsn-tooltip-reserva', function(ev){
+                        ev.stopImmediatePropagation();
+                    })#}
+    
+        
+        $('#gsn-calendario-body')
+            .on('mouseenter', '.gsn-calendario-bloque', function(){
+                
+                if($(this).data('id')===0) return;
+
+                var toolTip=$('.gsn-tooltip-reserva').clone().hide().fadeIn(1000);
+
+                $(this).append(toolTip);
+
+            })
+            .on('mouseleave', '.gsn-calendario-bloque', function(){
+                console.log('salida del mouse');
+                $(this).find('.gsn-tooltip-reserva').fadeOut(1000, function(){ this.remove(); });
+            })
+            .on('click', '.gsn-editar-reserva', function(){
+
+                
+                
+                
+            });
+        
+        
+   
+    });
+    
+
+
+   
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

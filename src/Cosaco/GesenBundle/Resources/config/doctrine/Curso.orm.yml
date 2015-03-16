@@ -1,0 +1,38 @@
+Cosaco\GesenBundle\Entity\Curso:
+    type: entity
+    table: curso
+    uniqueConstraints:
+        cu_cursos:
+            columns:
+                - grado
+                - letra
+                - nivel
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        grado:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+            comment: ''
+        letra:
+            type: string
+            nullable: false
+            length: 1
+            fixed: true
+            comment: ''
+        nivel:
+            type: string
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }
