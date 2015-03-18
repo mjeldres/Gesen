@@ -133,65 +133,89 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
         </div>
          
        
-                                
-                                
-        <!-- Modal -->
-        <div class=\"modal fade\" id=\"detalleReserva\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
-          <div class=\"modal-dialog\">
-            <div class=\"modal-content\">
-              <div class=\"modal-header\">
-                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
-                <h4 class=\"modal-title\" id=\"myModalLabel\">Editar Reserva</h4>
-              </div>
-              <div class=\"modal-body\" style=\"min-height: 200px;\">
-
-              </div>
-              <div class=\"modal-footer\">
-                <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Cerrar</button>
-                <button id=\"gsn-btn-guardar-reserva\" type=\"button\" class=\"btn btn-success\">Guardar</button>
-              </div>
-            
-            </div>
-          </div>
-        </div>                        
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
 
                                 
         <!-- tooltip editar reservas -->                        
         <div class=\"bg-warning gsn-tooltip-reserva panel-default\" style=\"top:0; left: -21px; position:absolute; border-radius:3px; width: 20px; height: 40px; border:1px solid #ccc; text-align:center;\"><a class=\"gsn-editar-reserva\" href=\"#\"><span style=\"font-size: 0.9em;\" class=\"glyphicon glyphicon-edit\"></span></a><a href=\"#\"><span style=\"font-size: 0.9em;\" class=\"glyphicon glyphicon-remove\"></span></a></div>   
                                 
-                                
+        <div id=\"objPrueba\"></div>                       
                                 
                                 
     <script>
         
+
+        
+                    
+        \$.fn.nuevaReserva=function(){       
+        
+            \$('#detalleReserva').remove();
+             \$('body').loaderAjax(true);
+
+            var obj=\$(this);       
+            var url=obtenerRuta('nueva_reserva');
+            
+            console.log(obj.data());
+            
+            \$.ajax({
+                type: \"GET\",
+                url: url,
+                dataType: \"html\",
+                success: function(data) {
+                    
+                
+                                      
+                    if(\$(data).length) {
+
+                      \$('body').append(\$(data));
+                      
+                        // Obtengo id de la dependencia actual
+                        var \$id_dep = \$('#gsn-cb-dependencias>li.active:first').data(\"depid\");
+                        var \$indice_col=obj.closest('td').index();
+                        var \$fecha=\$('#gsn-calendario-encabezado tr>th:eq('+\$indice_col+')').data('fechaCol');
+                      
+                        
+                        
+                        
+                        
+";
+        // line 101
+        echo "
+                        \$('#detalleReserva').modal('show');
+                        
+                    } 
+                        
+                }
+            });            
+            
+          //  return false;
+ 
+    }
+    
+
+        
         \$('document').ready(function(){
             
-            \$('#gsn-btn-guardar-reserva').on('click', function(){
-                
-                \$('#gsn-form-editar-reserva').submit();
-        
-                
-            });
             
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+";
+        // line 141
+        echo "            
             
             
         });
@@ -222,11 +246,11 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
 
         var gsnBloques=[
         ";
-        // line 142
+        // line 171
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["bloques"]) ? $context["bloques"] : $this->getContext($context, "bloques")));
         foreach ($context['_seq'] as $context["_key"] => $context["bloque"]) {
-            // line 143
+            // line 172
             echo "        {'id':";
             echo twig_escape_filter($this->env, $this->getAttribute($context["bloque"], "id", array()), "html", null, true);
             echo ", 'binicio':'";
@@ -239,7 +263,7 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['bloque'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 144
+        // line 173
         echo "];
 
         // Aviso en caso de que no se encuentren bloques horarios
@@ -299,7 +323,7 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
          */
         cargarReservas();
 ";
-        // line 206
+        // line 235
         echo "                                                    
                                                     
 
@@ -316,7 +340,7 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
          * Ambos parametros se pasan desde php
          */
         cargarCalendario(";
-        // line 221
+        // line 250
         echo twig_escape_filter($this->env, (isset($context["fecha"]) ? $context["fecha"] : $this->getContext($context, "fecha")), "html", null, true);
         echo ",";
         echo twig_escape_filter($this->env, (isset($context["id_dep"]) ? $context["id_dep"] : $this->getContext($context, "id_dep")), "html", null, true);
@@ -465,7 +489,7 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
 
     
 ";
-        // line 368
+        // line 397
         echo "    
         
         \$('#gsn-calendario-body')
@@ -528,6 +552,6 @@ class __TwigTemplate_8df020729297bb101989fcecdae793a538925a001fb0a68a2c06c14c307
 
     public function getDebugInfo()
     {
-        return array (  469 => 368,  320 => 221,  303 => 206,  243 => 144,  230 => 143,  226 => 142,  119 => 37,  108 => 35,  104 => 34,  86 => 20,  79 => 17,  75 => 16,  71 => 15,  67 => 14,  63 => 13,  59 => 12,  55 => 11,  52 => 10,  47 => 8,  41 => 7,  38 => 6,  11 => 1,);
+        return array (  493 => 397,  344 => 250,  327 => 235,  267 => 173,  254 => 172,  250 => 171,  218 => 141,  182 => 101,  119 => 37,  108 => 35,  104 => 34,  86 => 20,  79 => 17,  75 => 16,  71 => 15,  67 => 14,  63 => 13,  59 => 12,  55 => 11,  52 => 10,  47 => 8,  41 => 7,  38 => 6,  11 => 1,);
     }
 }

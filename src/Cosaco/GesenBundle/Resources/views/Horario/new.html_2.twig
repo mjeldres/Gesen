@@ -1,0 +1,317 @@
+
+{# {% form_theme form 'bootstrap_3_layout.html.twig' %} #}
+ {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} 
+
+
+{% block body %}
+           
+<!-- Modal -->
+<div class="modal fade" id="detalleReserva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger" style="border-radius: 5px 5px 0 0;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar Reserva</h4>
+            </div>
+            <div class="modal-body" style="min-height: 200px;">
+                <!-- comienzo del formulario -->
+                {{ form_start(form, {'attr' : {'id' : 'gsn-form-editar-reserva'} }) }}{{ form_errors(form) }}
+                    <div class="form-group gsn-tipo-reserva-cmb">{{ form_label(form.tipoReserva, "Reserva: ") }}{{ form_errors(form.tipoReserva) }}
+                        <div class="col-sm-10">
+{{ form_widget(form.tipoReserva,{'attr' : {'class': 'gsn-cmb-tipo-reserva'} }) }}
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+{% if form.asignatura is defined %}
+
+   {{ form_row(form.asignatura) }}
+{#     {{ form_row(form.curso) }}#}
+    
+{#    <div class="form-group gsn-option gsn-asignatura-cmb">
+        {{ form_label(form.asignatura) }}
+        {{ form_errors(form.asignatura) }}
+        <div class="col-sm-10">{{ form_widget(form.asignatura) }}</div>
+        <div class="clearfix"></div>
+    </div>#}
+    <div class="form-group gsn-option gsn-curso-cmb">
+        {{ form_label(form.curso) }}
+        {{ form_errors(form.curso) }}
+        <div class="col-sm-10">{{ form_widget(form.curso) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    
+{% endif %}
+
+{% if form.taller is defined %}
+{#    {{ form_row(form.taller) }}#}
+    
+    <div class="form-group gsn-option gsn-taller-cmb">
+        {{ form_label(form.taller) }}
+        {{ form_errors(form.taller) }}
+        <div class="col-sm-10">{{ form_widget(form.taller) }}</div>
+        <div class="clearfix"></div>
+    </div>
+
+{% endif %}       
+
+{% if form.dias[0] is defined %}
+
+{#    {{ form_row(form.dias[0].actividadReserva) }}
+    {{ form_row(form.dias[0].observacionReserva) }}#}
+         
+    <div class="form-group">
+        {{ form_label(form.dias[0].actividadReserva) }}
+        {{ form_errors(form.dias[0].actividadReserva) }}
+        <div class="col-sm-10">{{ form_widget(form.dias[0].actividadReserva) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dias[0].observacionReserva) }}
+        {{ form_errors(form.dias[0].observacionReserva) }}
+        <div class="col-sm-10">{{ form_widget(form.dias[0].observacionReserva) }}</div>
+        <div class="clearfix"></div>
+    </div>
+    
+
+{% endif %}
+
+    {{ form_rest(form) }} 
+    {{ form_end(form) }}
+                      
+              
+              
+              
+              
+              
+</div>          
+              
+              
+              
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button id="gsn-btn-guardar-reserva" type="submit" class="btn btn-success">Guardar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>        
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+          
+          
+          
+  {#  <script src="{{ asset('js/jquery-1.11.2.min.js') }}"></script> #}
+    <script>
+        
+    $('document').ready(function(){
+         
+        
+        $('#gsn-form-editar-reserva').submit(function(ev){
+            
+            ev.preventDefault();
+            
+            var form = $(this);
+            
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serializeArray(),
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+              
+        });
+        
+
+        
+        /*
+         * Cargamos dinamicamente los combos al seleccionar el tipo de reserva
+         */
+        var cmb=$('.gsn-cmb-tipo-reserva');
+
+        cmb.change(function(){
+            
+            var form=$(this).closest('form');
+            var form_name=form.attr('name');
+            
+            console.log(form_name);
+            
+            var data = {};
+            data[cmb.attr('name')]=cmb.val();
+            
+            $('select[name="'+form_name+'[asignatura]"]').closest('.form-group').remove();
+            $('select[name="'+form_name+'[curso]"]').closest('.form-group').remove();
+            $('select[name="'+form_name+'[taller]"]').closest('.form-group').remove();
+                         
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: data,
+                success: function(html) {
+
+                    if(cmb.prop('selectedIndex')===0) {
+                        var asignatura = $(html).find('select[name="'+form_name+'[asignatura]"]').closest('.form-group');
+                        var curso = $(html).find('select[name="'+form_name+'[curso]"]').closest('.form-group');
+
+                        curso.insertAfter('.gsn-tipo-reserva-cmb');
+                        asignatura.insertAfter('.gsn-tipo-reserva-cmb');
+
+                    }
+                  
+                    if(cmb.prop('selectedIndex')===1) {
+                        var taller = $(html).find('select[name="'+form_name+'[taller]"]').closest('.form-group');
+
+                        taller.insertAfter('.gsn-tipo-reserva-cmb');
+                    }
+                   
+                }
+            })
+            
+        });
+        
+    });
+        
+    </script>
+        
+          
+          
+          
+          
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+  
+        
+        
+        
+        
+        
+        
+        
+        
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+          
+          
+          
+    
+    
+
+          
+          
+          
+          
+          
+          
+          
+          
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+          
+
+   
+   
+   
+   
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+     
+
+        
+{% endblock %}

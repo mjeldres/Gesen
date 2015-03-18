@@ -37,7 +37,8 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        echo "  
+        // line 4
+        echo "<div id=\"header\">
     <nav id=\"gsn-nav\" class=\"navbar navbar-default navbar-fixed-top\">
         <div class=\"container-fluid\">
             <div class=\"navbar-header\">
@@ -73,7 +74,7 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
             </ul>
             <ul id=\"gsn-nav-menu-sesion\" class=\"nav navbar-nav\">
                 <li class=\"dropdown\"";
-        // line 38
+        // line 39
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
             echo "  style=\"display:none;\"";
         }
@@ -84,20 +85,20 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
                     </a>
                     <div id=\"gsn-nav-menu-form\" class=\"dropdown-menu dropdown-menu-right\" role=\"menu\">
                         <!--Panel desplegable contenedor del formulario de login -->";
-        // line 44
-        $this->displayBlock('login', $context, $blocks);
         // line 45
+        $this->displayBlock('login', $context, $blocks);
+        // line 46
         echo "                    </div>
                 </li>
                 <li class=\"dropdown\"";
-        // line 47
+        // line 48
         if ( !$this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
             echo "  style=\"display:none;\"";
         }
         echo ">
                     <!-- Menu de usuario -->
                     <a href=\"#\" class=\"gsn-dropdown-user\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\" data-user_id=\"";
-        // line 49
+        // line 50
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "id", array()), "html", null, true);
         } else {
@@ -105,7 +106,7 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
         }
         echo "\">
                         <span class=\"gsn-user-perfil-name\">Hola </span><span>";
-        // line 50
+        // line 51
         if ($this->env->getExtension('security')->isGranted("IS_AUTHENTICATED_REMEMBERED")) {
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()), "primerNombre", array()), "html", null, true);
         }
@@ -115,7 +116,7 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
                         <!-- Menu desplegable del usuario -->
                         <li><a href=\"#\">Perfil</a></li>
                         <li class=\"gsn-cerrar-sesion\"><a href=\"";
-        // line 55
+        // line 56
         echo $this->env->getExtension('routing')->getPath("gsn_logout");
         echo "\">Cerrar sesión</a></li>
                     </ul>
@@ -123,13 +124,15 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
               </ul>
             </div><!-- /.navbar-collapse --> 
         </div>
-    </nav>
-    <div class=\"container-fluid\">
+    </nav>                       
+</div>   
+<div id=\"body\">
+    <div class=\"container-fluid\"> 
         <div class=\"row\">
             <div class=\"col-sm-3 col-md-2 sidebar\">
                 <div class=\"gesen-logo\">
                     <img src=\"";
-        // line 66
+        // line 69
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("img/cosaco_md.png"), "html", null, true);
         echo "\" />
                 </div>
@@ -149,24 +152,27 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
             </div>        
         <div class=\"col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main\">   
         <!-- bloque contenido -->";
-        // line 83
-        $this->displayBlock('cont_derecha', $context, $blocks);
-        // line 85
-        echo "        </div>      
-    ";
         // line 86
+        $this->displayBlock('cont_derecha', $context, $blocks);
+        // line 88
+        echo "        </div> 
+    </div>
+</div>
+        
+    ";
+        // line 92
         echo $this->env->getExtension('dump')->dump($this->env, $context, $this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "user", array()));
         echo "
 ";
     }
 
-    // line 44
+    // line 45
     public function block_login($context, array $blocks = array())
     {
         $this->env->loadTemplate("CosacoGesenBundle:Seguridad:login_form.html.twig")->display(array_merge($context, array("error" => "", "last_username" => "")));
     }
 
-    // line 83
+    // line 86
     public function block_cont_derecha($context, array $blocks = array())
     {
     }
@@ -183,6 +189,6 @@ class __TwigTemplate_878c5ea3af9ddfb3b4894d4dc20fa60053687ca697e3fd1b4f834decb54
 
     public function getDebugInfo()
     {
-        return array (  170 => 83,  164 => 44,  158 => 86,  155 => 85,  153 => 83,  133 => 66,  119 => 55,  109 => 50,  101 => 49,  94 => 47,  90 => 45,  88 => 44,  77 => 38,  38 => 3,  11 => 1,);
+        return array (  176 => 86,  170 => 45,  164 => 92,  158 => 88,  156 => 86,  136 => 69,  120 => 56,  110 => 51,  102 => 50,  95 => 48,  91 => 46,  89 => 45,  78 => 39,  41 => 4,  38 => 3,  11 => 1,);
     }
 }

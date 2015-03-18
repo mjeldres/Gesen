@@ -128,63 +128,126 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/reservas')) {
-            if (0 === strpos($pathinfo, '/reservas_dia')) {
-                // reservas_dia
-                if (rtrim($pathinfo, '/') === '/reservas_dia') {
-                    if (substr($pathinfo, -1) !== '/') {
-                        return $this->redirect($pathinfo.'/', 'reservas_dia');
+            if (0 === strpos($pathinfo, '/reservas_')) {
+                if (0 === strpos($pathinfo, '/reservas_hora')) {
+                    // reservas_hora
+                    if (rtrim($pathinfo, '/') === '/reservas_hora') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'reservas_hora');
+                        }
+
+                        return array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::indexAction',  '_route' => 'reservas_hora',);
                     }
 
-                    return array (  '_controller' => 'CosacoGesenBundle:ReservaDia:index',  '_route' => 'reservas_dia',);
-                }
-
-                // reservas_dia_show
-                if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_show')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:show',));
-                }
-
-                // reservas_dia_new
-                if ($pathinfo === '/reservas_dia/new') {
-                    return array (  '_controller' => 'CosacoGesenBundle:ReservaDia:new',  '_route' => 'reservas_dia_new',);
-                }
-
-                // reservas_dia_create
-                if ($pathinfo === '/reservas_dia/create') {
-                    if ($this->context->getMethod() != 'POST') {
-                        $allow[] = 'POST';
-                        goto not_reservas_dia_create;
+                    // reservas_hora_show
+                    if (preg_match('#^/reservas_hora/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_hora_show')), array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::showAction',));
                     }
 
-                    return array (  '_controller' => 'CosacoGesenBundle:ReservaDia:create',  '_route' => 'reservas_dia_create',);
-                }
-                not_reservas_dia_create:
-
-                // reservas_dia_edit
-                if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_edit')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:edit',));
-                }
-
-                // reservas_dia_update
-                if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
-                    if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
-                        $allow = array_merge($allow, array('POST', 'PUT'));
-                        goto not_reservas_dia_update;
+                    // reservas_hora_new
+                    if ($pathinfo === '/reservas_hora/new') {
+                        return array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::newAction',  '_route' => 'reservas_hora_new',);
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_update')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:update',));
-                }
-                not_reservas_dia_update:
+                    // reservas_hora_create
+                    if ($pathinfo === '/reservas_hora/create') {
+                        if ($this->context->getMethod() != 'POST') {
+                            $allow[] = 'POST';
+                            goto not_reservas_hora_create;
+                        }
 
-                // reservas_dia_delete
-                if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
-                    if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
-                        $allow = array_merge($allow, array('POST', 'DELETE'));
-                        goto not_reservas_dia_delete;
+                        return array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::createAction',  '_route' => 'reservas_hora_create',);
+                    }
+                    not_reservas_hora_create:
+
+                    // reservas_hora_edit
+                    if (preg_match('#^/reservas_hora/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_hora_edit')), array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::editAction',));
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_delete')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:delete',));
+                    // reservas_hora_update
+                    if (preg_match('#^/reservas_hora/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                            $allow = array_merge($allow, array('POST', 'PUT'));
+                            goto not_reservas_hora_update;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_hora_update')), array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::updateAction',));
+                    }
+                    not_reservas_hora_update:
+
+                    // reservas_hora_delete
+                    if (preg_match('#^/reservas_hora/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                            $allow = array_merge($allow, array('POST', 'DELETE'));
+                            goto not_reservas_hora_delete;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_hora_delete')), array (  '_controller' => 'Cosaco\\GesenBundle\\Controller\\ReservaHoraController::deleteAction',));
+                    }
+                    not_reservas_hora_delete:
+
                 }
-                not_reservas_dia_delete:
+
+                if (0 === strpos($pathinfo, '/reservas_dia')) {
+                    // reservas_dia
+                    if (rtrim($pathinfo, '/') === '/reservas_dia') {
+                        if (substr($pathinfo, -1) !== '/') {
+                            return $this->redirect($pathinfo.'/', 'reservas_dia');
+                        }
+
+                        return array (  '_controller' => 'CosacoGesenBundle:ReservaDia:index',  '_route' => 'reservas_dia',);
+                    }
+
+                    // reservas_dia_show
+                    if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_show')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:show',));
+                    }
+
+                    // reservas_dia_new
+                    if ($pathinfo === '/reservas_dia/new') {
+                        return array (  '_controller' => 'CosacoGesenBundle:ReservaDia:new',  '_route' => 'reservas_dia_new',);
+                    }
+
+                    // reservas_dia_create
+                    if ($pathinfo === '/reservas_dia/create') {
+                        if ($this->context->getMethod() != 'POST') {
+                            $allow[] = 'POST';
+                            goto not_reservas_dia_create;
+                        }
+
+                        return array (  '_controller' => 'CosacoGesenBundle:ReservaDia:create',  '_route' => 'reservas_dia_create',);
+                    }
+                    not_reservas_dia_create:
+
+                    // reservas_dia_edit
+                    if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_edit')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:edit',));
+                    }
+
+                    // reservas_dia_update
+                    if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                            $allow = array_merge($allow, array('POST', 'PUT'));
+                            goto not_reservas_dia_update;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_update')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:update',));
+                    }
+                    not_reservas_dia_update:
+
+                    // reservas_dia_delete
+                    if (preg_match('#^/reservas_dia/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                        if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                            $allow = array_merge($allow, array('POST', 'DELETE'));
+                            goto not_reservas_dia_delete;
+                        }
+
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'reservas_dia_delete')), array (  '_controller' => 'CosacoGesenBundle:ReservaDia:delete',));
+                    }
+                    not_reservas_dia_delete:
+
+                }
 
             }
 

@@ -51,64 +51,93 @@
         </div>
          
        
-                                
-                                
-        <!-- Modal -->
-        <div class="modal fade" id="detalleReserva" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Editar Reserva</h4>
-              </div>
-              <div class="modal-body" style="min-height: 200px;">
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button id="gsn-btn-guardar-reserva" type="button" class="btn btn-success">Guardar</button>
-              </div>
-            
-            </div>
-          </div>
-        </div>                        
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
 
                                 
         <!-- tooltip editar reservas -->                        
         <div class="bg-warning gsn-tooltip-reserva panel-default" style="top:0; left: -21px; position:absolute; border-radius:3px; width: 20px; height: 40px; border:1px solid #ccc; text-align:center;"><a class="gsn-editar-reserva" href="#"><span style="font-size: 0.9em;" class="glyphicon glyphicon-edit"></span></a><a href="#"><span style="font-size: 0.9em;" class="glyphicon glyphicon-remove"></span></a></div>   
                                 
-                                
+        <div id="objPrueba"></div>                       
                                 
                                 
     <script>
         
+
+        
+                    
+        $.fn.nuevaReserva=function(){       
+        
+            $('#detalleReserva').remove();
+             $('body').loaderAjax(true);
+
+            var obj=$(this);       
+            var url=obtenerRuta('nueva_reserva');
+            
+            console.log(obj.data());
+            
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "html",
+                success: function(data) {
+                    
+                
+                                      
+                    if($(data).length) {
+
+                      $('body').append($(data));
+                      
+                        // Obtengo id de la dependencia actual
+                        var $id_dep = $('#gsn-cb-dependencias>li.active:first').data("depid");
+                        var $indice_col=obj.closest('td').index();
+                        var $fecha=$('#gsn-calendario-encabezado tr>th:eq('+$indice_col+')').data('fechaCol');
+                      
+                        
+                        
+                        
+                        
+{#                        var data = {id_dia: obj.data('id'), b_inicio: obj.data('binicio'), b_termino: obj.data('btermino'), fecha: $fecha, id_dep: $id_dep};
+
+                        $('#detalleReserva').on('show.bs.modal', data, function(ev){ console.log(ev); });#}
+
+                        $('#detalleReserva').modal('show');
+                        
+                    } 
+                        
+                }
+            });            
+            
+          //  return false;
+ 
+    }
+    
+
+        
         $('document').ready(function(){
             
-            $('#gsn-btn-guardar-reserva').on('click', function(){
+            
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+{#            $('#gsn-btn-guardar-reserva').on('click', function(){
                 
                 $('#gsn-form-editar-reserva').submit();
         
                 
-            });
+            });#}
             
             
             

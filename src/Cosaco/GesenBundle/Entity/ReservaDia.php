@@ -2,7 +2,8 @@
 
 namespace Cosaco\GesenBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * ReservaDia
@@ -30,19 +31,26 @@ class ReservaDia
     private $chequeoReserva;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $fechaActualizacion;
 
     /**
-     * @var \Cosaco\GesenBundle\Entity\Reserva
+     * @var Reserva
      */
     private $reserva;
 
+   /**
+     * @var ArrayCollection
+     */
+    private $horas;
+
     /*
+     * Constructor 
      * Valor por defecto para campos
      */
     public function __construct() {
+        $this->horas = new ArrayCollection();
         $this->chequeoReserva='0';
     }
 
@@ -54,6 +62,37 @@ class ReservaDia
     public function getId()
     {
         return $this->id;
+    }
+    
+    /*
+     * Get horas
+     *
+     * @return Collection
+     */
+    public function getHoras()
+    {
+        return $this->horas;
+    }
+    
+    /*
+     * Agregar horas
+     */
+    public function addHora(ReservaHora $hora)
+    {
+        // Agregamos el id de la reserva
+        $hora->setReservaDia($this);
+        
+        $this->horas->add($hora);
+        
+        return $this;
+    }
+    
+    /*
+     * Quitar horas
+     */
+    public function removeHora(ReservaHora $hora)
+    {
+        $this->horas->removeElement($hora);
     }
 
     /**
@@ -128,7 +167,7 @@ class ReservaDia
     /**
      * Get fechaActualizacion
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getFechaActualizacion()
     {
@@ -138,10 +177,10 @@ class ReservaDia
     /**
      * Set reserva
      *
-     * @param \Cosaco\GesenBundle\Entity\Reserva $reserva
+     * @param Reserva $reserva
      * @return ReservaDia
      */
-    public function setReserva(\Cosaco\GesenBundle\Entity\Reserva $reserva = null)
+    public function setReserva(Reserva $reserva = null)
     {
         $this->reserva = $reserva;
 
@@ -151,10 +190,14 @@ class ReservaDia
     /**
      * Get reserva
      *
-     * @return \Cosaco\GesenBundle\Entity\Reserva 
+     * @return Reserva 
      */
     public function getReserva()
     {
         return $this->reserva;
+    }
+    
+    public function __toString() {
+        return (string)$this->actividadReserva;
     }
 }

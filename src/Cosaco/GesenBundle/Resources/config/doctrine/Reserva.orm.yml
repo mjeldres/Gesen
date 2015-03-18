@@ -40,7 +40,7 @@ Cosaco\GesenBundle\Entity\Reserva:
     oneToMany:
         dias:
             targetEntity: ReservaDia
-            cascade: ["persist", "remove"]
+            cascade: ['persist', 'remove']
             mappedBy: reserva
     manyToOne:
         asignatura:

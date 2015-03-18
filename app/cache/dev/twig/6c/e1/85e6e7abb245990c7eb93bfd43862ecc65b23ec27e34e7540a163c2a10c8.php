@@ -21,179 +21,160 @@ class __TwigTemplate_6ce185e6e7abb245990c7eb93bfd43862ecc65b23ec27e34e7540a163c2
 ";
         // line 3
         $this->env->getExtension('form')->renderer->setTheme((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), array(0 => "bootstrap_3_horizontal_layout.html.twig"));
-        // line 4
-        echo "
+        echo " 
 
 ";
-        // line 6
+        // line 5
         $this->displayBlock('body', $context, $blocks);
     }
 
     public function block_body($context, array $blocks = array())
     {
-        // line 7
-        echo "
-    
-   ";
-        // line 10
-        echo "   
-  ";
-        // line 12
-        echo "   
- ";
-        // line 14
-        echo "  
- 
-   
-   
-   
+        // line 6
+        echo "              
+<!-- Modal -->
+<div class=\"modal fade\" id=\"detalleReserva\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
+    <div class=\"modal-dialog\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header bg-danger\" style=\"border-radius: 5px 5px 0 0;\">
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>
+                <h4 class=\"modal-title\" id=\"myModalLabel\">Editar Reserva</h4>
+            </div>
+            <div class=\"modal-body\" style=\"min-height: 200px;\">
 
+                <div role=\"tabpanel\">
 
+                    <!-- Nav tabs -->
+                    <ul class=\"nav nav-tabs\" role=\"tablist\">
+                        <li role=\"presentation\" class=\"active\"><a href=\"#home\" aria-controls=\"home\" role=\"tab\" data-toggle=\"tab\">Día</a></li>
+                        <li role=\"presentation\"><a href=\"#profile\" aria-controls=\"profile\" role=\"tab\" data-toggle=\"tab\">Lote</a></li>
+                    </ul>
 
-          
-       <div role=\"tabpanel\">
+                    <!-- Tab panes -->
+                    <div class=\"tab-content\" style=\"margin-top:20px;\">
 
-  <!-- Nav tabs -->
-  <ul class=\"nav nav-tabs\" role=\"tablist\">
-    <li role=\"presentation\" class=\"active\"><a href=\"#home\" aria-controls=\"home\" role=\"tab\" data-toggle=\"tab\">Home</a></li>
-    <li role=\"presentation\"><a href=\"#profile\" aria-controls=\"profile\" role=\"tab\" data-toggle=\"tab\">Profile</a></li>
-  </ul>
+                        <div role=\"tabpanel\" class=\"tab-pane active\" id=\"home\">    
 
-  <!-- Tab panes -->
-  <div class=\"tab-content\">
-      
-<div role=\"tabpanel\" class=\"tab-pane active\" id=\"home\">
-    
-    
-    ";
-        // line 37
+                            <!-- comienzo del formulario -->
+                            ";
+        // line 31
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start', array("attr" => array("id" => "gsn-form-editar-reserva")));
-        echo "
-    ";
-        // line 38
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'errors');
         echo "
-    
-    <div class=\"form-group gsn-tipo-reserva-cmb\">
-        ";
-        // line 42
-        echo "        ";
+                
+                            <!-- select tipo reservas -->
+                            <div class=\"form-group gsn-tipo-reserva-cmb\">";
+        // line 34
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tipoReserva", array()), 'label', array("label" => "Reserva: "));
-        echo "
-        ";
-        // line 43
         echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tipoReserva", array()), 'errors');
+        echo "<div class=\"col-sm-10\">";
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tipoReserva", array()), 'widget', array("attr" => array("class" => "gsn-cmb-tipo-reserva")));
+        echo "</div><div class=\"clearfix\"></div></div>
+                    
+";
+        // line 36
+        if ($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "asignatura", array(), "any", true, true)) {
+            // line 37
+            echo "                            <!-- select asignatura -->
+                            <div class=\"form-group\">";
+            // line 38
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "asignatura", array()), 'label');
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "asignatura", array()), 'errors');
+            echo "<div class=\"col-sm-10\">";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "asignatura", array()), 'widget');
+            echo "</div><div class=\"clearfix\"></div></div>
+
+                            <!-- select curso -->
+                            <div class=\"form-group\">";
+            // line 41
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "curso", array()), 'label');
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "curso", array()), 'errors');
+            echo "<div class=\"col-sm-10\">";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "curso", array()), 'widget');
+            echo "</div><div class=\"clearfix\"></div></div>
+";
+        }
+        // line 43
         echo "
-        <div class=\"col-sm-10\">";
+";
         // line 44
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tipoReserva", array()), 'widget');
-        echo "</div>
-        <div class=\"clearfix\"></div>
-    </div>
-    <div class=\"form-group gsn-option gsn-asignatura-cmb\">
-        ";
+        if ($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "taller", array(), "any", true, true)) {
+            // line 45
+            echo "                            <!-- select taller -->
+                            <div class=\"form-group gsn-option gsn-taller-cmb\">";
+            // line 46
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "taller", array()), 'label');
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "taller", array()), 'errors');
+            echo "<div class=\"col-sm-10\">";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "taller", array()), 'widget');
+            echo "</div><div class=\"clearfix\"></div></div>
+";
+        }
+        // line 47
+        echo "       
+";
         // line 48
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "asignatura", array()), 'label');
-        echo "
-        ";
-        // line 49
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "asignatura", array()), 'errors');
-        echo "
-        <div class=\"col-sm-10\">";
-        // line 50
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "asignatura", array()), 'widget');
-        echo "</div>
-        <div class=\"clearfix\"></div>
-    </div>
-    <div class=\"form-group gsn-option gsn-taller-cmb\">
-        ";
-        // line 54
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "taller", array()), 'label');
-        echo "
-        ";
+        if ($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "dias", array(), "any", false, true), 0, array(), "array", true, true)) {
+            // line 49
+            echo "                            <!-- ingreso actividad -->
+                            <div class=\"form-group\">";
+            // line 50
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "actividadReserva", array()), 'label');
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "actividadReserva", array()), 'errors');
+            echo "<div class=\"col-sm-10\">";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "actividadReserva", array()), 'widget');
+            echo "</div><div class=\"clearfix\"></div></div>
+
+                            <!-- ingreso observación -->
+                            <div class=\"form-group\">";
+            // line 53
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "observacionReserva", array()), 'label');
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "observacionReserva", array()), 'errors');
+            echo "<div class=\"col-sm-10\">";
+            echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "observacionReserva", array()), 'widget');
+            echo "</div><div class=\"clearfix\"></div></div>
+";
+        }
         // line 55
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "taller", array()), 'errors');
+        echo "                            <!-- submit -->
+                            <div style=\"border-bottom: 1px solid #ddd; margin-bottom: 15px;\"></div>
+                            <div class=\"form-group\" style=\"margin-bottom:0;\"><div class=\"col-sm-2\"><button class=\"gsn-prevent-validation btn btn-primary pull-left\"><span class=\"glyphicon glyphicon-print\"></span></button></div><div class=\"col-sm-10\"><button type=\"submit\" class=\"btn btn-success pull-right\" id=\"";
+        // line 57
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "vars", array()), "id", array()), "html", null, true);
+        echo "_submit\" name=\"";
+        echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "vars", array()), "name", array()), "html", null, true);
+        echo "[submit]\"><span class=\"glyphicon glyphicon-floppy-save\"></span> Guardar</button><button id=\"gsn-close-editar-reserva\" class=\"gsn-prevent-validation btn btn-default pull-right\" style=\"margin-right: 5px;\">Cerrar</button></div></div>
+
+                            ";
+        // line 59
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 'widget', array("attr" => array("style" => "display:none !important; margin:0 !important;")));
         echo "
-        <div class=\"col-sm-10\">";
-        // line 56
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "taller", array()), 'widget');
-        echo "</div>
-        <div class=\"clearfix\"></div>
-    </div>
-    <div class=\"form-group gsn-option gsn-curso-cmb\">
-        ";
+                            ";
         // line 60
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "curso", array()), 'label');
-        echo "
-        ";
-        // line 61
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "curso", array()), 'errors');
-        echo "
-        <div class=\"col-sm-10\">";
-        // line 62
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "curso", array()), 'widget');
-        echo "</div>
-        <div class=\"clearfix\"></div>
-    </div>
-      
-    <div class=\"form-group\">
-        ";
-        // line 67
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "actividadReserva", array()), 'label');
-        echo "
-        ";
-        // line 68
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "actividadReserva", array()), 'errors');
-        echo "
-        <div class=\"col-sm-10\">";
-        // line 69
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "actividadReserva", array()), 'widget');
-        echo "</div>
-        <div class=\"clearfix\"></div>
-    </div>
-    <div class=\"form-group\">
-        ";
-        // line 73
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "observacionReserva", array()), 'label');
-        echo "
-        ";
-        // line 74
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "observacionReserva", array()), 'errors');
-        echo "
-        <div class=\"col-sm-10\">";
-        // line 75
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dias", array()), 0, array(), "array"), "observacionReserva", array()), 'widget');
-        echo "</div>
-        <div class=\"clearfix\"></div>
-    </div>     
-           
-    ";
-        // line 79
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'rest');
-        echo "
-        ";
-        // line 80
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
-          
-          
-      </div>
-        <div role=\"tabpanel\" class=\"tab-pane\" id=\"profile\">
+                            
+                        </div>    
+                        <div role=\"tabpanel\" class=\"tab-pane\" id=\"profile\"></div>
+                    </div>
+                </div>          
+            </div>
+        </div>
+    </div>        
 
+ 
+<script>
         
-             <script>
-                 
     \$('document').ready(function(){
         
-        function guardarReserva(form) {
-                               
-            var values=[];
+        \$('body').on('click', '.gsn-prevent-validation', function(ev){ ev.preventDefault(); });
+         
+        
+        \$('#gsn-form-editar-reserva').submit(function(ev){
             
-            \$.each(form.serializeArray(), function(i, field){
-                values[field.name]=field.value;
-            });
+            ev.preventDefault();
             
-            console.log(values);
+            var form = \$(this);
             
             \$.ajax({
                 type: form.attr('method'),
@@ -201,485 +182,65 @@ class __TwigTemplate_6ce185e6e7abb245990c7eb93bfd43862ecc65b23ec27e34e7540a163c2
                 data: form.serializeArray(),
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data);
+               //     console.log(data);
                 }
-                });
+            });
+              
+        });
+              
+        /*
+         * Cargamos dinamicamente los combos al seleccionar el tipo de reserva
+         */
+        var cmb=\$('.gsn-cmb-tipo-reserva');
+
+        cmb.change(function(){
             
-        }
+            var form=\$(this).closest('form');
+            var form_name=form.attr('name');
+            
+            //console.log(form_name);
+            
+            var data = {};
+            data[cmb.attr('name')]=cmb.val();
+            
+            \$('select[name=\"'+form_name+'[asignatura]\"]').closest('.form-group').remove();
+            \$('select[name=\"'+form_name+'[curso]\"]').closest('.form-group').remove();
+            \$('select[name=\"'+form_name+'[taller]\"]').closest('.form-group').remove();
+                         
+            \$.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: data,
+                success: function(html) {
+                    
         
-        
-        \$('#gsn-form-editar-reserva').submit(function(ev){
-            
-            ev.preventDefault();
-            
- console.log(\"btn-guardar\");
-            guardarReserva(\$(this));
-            
+
+                    if(cmb.prop('selectedIndex')===0) {
+                        var asignatura = \$(html).find('select[name=\"'+form_name+'[asignatura]\"]').closest('.form-group');
+                        var curso = \$(html).find('select[name=\"'+form_name+'[curso]\"]').closest('.form-group');
+
+                        curso.insertAfter('.gsn-tipo-reserva-cmb');
+                        asignatura.insertAfter('.gsn-tipo-reserva-cmb');
+
+                    }
+                  
+                    if(cmb.prop('selectedIndex')===1) {                  
+                        
+                        var taller = \$(html).find('select[name=\"'+form_name+'[taller]\"]').closest('.form-group');
+
+                        taller.insertAfter('.gsn-tipo-reserva-cmb');
+                    }
+                   
+                }
+            })
             
         });
         
-        
-        
-    });             
-                 
-                 
-      
-    \$(function(){
-                       
-                \$('.gsn-dragging-reservas').bonsai({
-                    expandAll: false,
-                    checkboxes: true, // depends on jquery.qubit plugin
-                    createCheckboxes: true // takes values from data-name and data-value, and data-name is inherited
-                });
     });
-            
-
-            
-        \$('document').ready(function(){
-                
-                
-                
-            var removerObjs=function(contenedor,estado) {
-  
-                var labs=contenedor.children(\"li\");                   
-
-                var depCount=labs.length;
-
-                // Limpiamos dependencias
-                for(var l=0; l<depCount; l++) {
-                    var lab=\$(labs[l]);
-                    var dias=lab.children(\"ol\").children(\"li\");
-
-                    // Limpiamos dias
-                    for (var d=0; d<dias.length; d++) {
-                        var dia=\$(dias[d]);
-                        var bloques=dia.children(\"ol\").children(\"li\");
-
-                        // Limpiamos bloques
-                        for(var b=0; b<bloques.length; b++) {
-                            var bloque=\$(bloques[b]);
-
-                            if(bloque.children(\"input\").prop(\"checked\")===estado) bloque.remove();
-                        }
-
-                        if(dia.children(\"ol\").children(\"li\").length===0) dia.remove();
-                    }
-
-                    if(lab.children(\"ol\").children(\"li\").length===0) lab.remove();
-                }
-                
-                contenedor.actualizarBadge();
-
-            }
-            
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                \$('.gsn-dragging-reservas').draggable({
-                   helper:'clone',
-                   stack:'.gsn-dragging-reservas',
-                   appendTo: 'parent',
-                   cursorAt: { top: 5, left: 5},
-                   stop: function(){
-                       \$('.gsn-dragging-reservas').bonsai('update');
-                   },
-                   start: function(ev,ui){
-                     /*
-                      * Quitamos elementos no seleccionados 
-                      */  
-                     removerObjs(ui.helper,false);
-";
-        // line 228
-        echo "                       
-
-                        ";
-        // line 247
-        echo "                    
         
-                    
-                   }
-                });
-                
-                \$.fn.agregarOrdenado=function(bloque,attrDatos){
-                
-                    var objs=this.children('li');
-                    var objsCount=objs.length;
-
-                    for (var i=0; i<objsCount; i++) {
-                        var obj=\$(objs[i]);
-
-                        if(bloque.data(attrDatos)<obj.data(attrDatos)) {
-
-                            bloque.insertBefore(obj);
-                            break;
-                        }
-
-
-                        if(bloque.data(attrDatos)>obj.data(attrDatos)) {
-
-                            bloque.insertAfter(obj);
-
-                        }
-
-                    }
-                }
-                
-                \$.fn.actualizarBadge=function(){
-                    var contObjs=this.find('.gsn-chkbox-nivel2');
-                    
-                    for(var i=0; i<contObjs.length; i++) {
-                        var obj=\$(contObjs[i]).children('ol').children('li');
-                        \$(contObjs[i]).find('.badge').text(obj.length);
-                    }
-                }
-                
-                \$('.gsn-reservas-edicion>.panel-body').droppable({
-                    accept: \".gsn-dragging-reservas\",
-                    drop: function(ev,ui){
-                        
-                        // Invalidamos el dropbox en caso de que arrastremos sobre el mismo bloque
-                        if(\$(ui.draggable).attr('id')===\$(ev.target).children('ol').attr('id')) return;
-                        
-                        /*
-                         * Registramos los elementos al mover las reservas
-                         * Manteniendo la estructura del treeview
-                         */
-
-                        var rootObjDst=\$(this).children(\"ol\");
-                        var rootObj=\$(ui.helper).clone();                    
-                        var objs=rootObj.find('.gsn-chkbox-nivel3');
-                        
-                        for(var i=0; i<objs.length; i++) {
-                           var obj=\$(objs[i]);
-                           var dia=obj.closest(\".gsn-chkbox-nivel2\");
-                           var dep=obj.closest(\".gsn-chkbox-nivel1\");
-                           var depDst=rootObjDst.children('li[data-iddep='+dep.data('iddep')+']');
-                           
-                           if(depDst.length===0) {
-                               rootObjDst.append(dep);                               
-                           } 
-                           else {
-                               
-                               var diaDst=depDst.children(\"ol\").children('li[data-iddia=\"'+dia.data('iddia')+'\"]');
-                               
-                               if(diaDst.length===0) {
-                                   depDst.children('ol').agregarOrdenado(dia,'iddia');
-       
-                               } else {
-                                   
-                                    var objDst=diaDst.children(\"ol\").children('li[data-idbloque='+obj.data('idbloque')+']');
-                                    if(objDst.length===0) diaDst.children('ol').agregarOrdenado(obj,'idbloque');
-                               }                        
-                                 
-                           }
-                            
-                        }
-                            // Desseleccionamos controles
-                            rootObjDst.find('input').attr('checked',false);
-                            
-                            // Quitamos horas del control que inició el evento
-                            removerObjs(ui.draggable,true);
-                            
-                            // Actualizamos cantidad de horas por dia
-                            rootObjDst.actualizarBadge();
-                    }
-                    
-                });               
-                
-            });
-            
-                            
-    var ocultarCampos=function(reset) {
-
-        var selItem=\$('.gsn-tipo-reserva-cmb>div>select').val();
-
-        // if(!reset) \$(\".gsn-option>select\").prop(\"selectedIndex\",0);
-        \$('.gsn-option').hide();
-
-        switch(selItem) {
-            case 'Curricular':
-
-                \$('.gsn-asignatura-cmb').show();
-                \$('.gsn-curso-cmb').show();
-                break;
-
-            case 'Taller':
-
-                \$('.gsn-taller-cmb').show();
-                break;
-        }
-    }
-                
-                
-    \$(document).ready(function(){
-
-        ocultarCampos(true);
-        \$('.gsn-tipo-reserva-cmb>div>select').change(ocultarCampos);
-console.log(\$('.gsn-tipo-reserva-cmb>div>select').val());
-    });
-              
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        </script>        
-
-        <div class=\"row\">
-
-<div id=\"col-left\" class=\"col-xs-6\">
-<div  id=\"gsn-reservas-nuevas\" class=\"gsn-reservas-edicion panel panel-default\">
-  <div class=\"panel-heading\">
-    <h3 class=\"panel-title\">Horas disponibles</h3>
-  </div>
-  <div class=\"panel-body\"  style=\"overflow-y: scroll; height: 200px;\">
-     
-<ol id=\"gsn-lista-reservas-nuevas\" class=\"gsn-dragging-reservas\">
-    <li class='gsn-chkbox-nivel1 expanded' data-iddep='1'>
-        <span> </span><span class=\"glyphicon glyphicon-home\"></span><span> Enlaces</span>
-    <ol>
-        <li class=\"gsn-chkbox-nivel2\" data-iddia=\"20150323\">
-            <span> </span><span class=\"glyphicon glyphicon-calendar\"></span><span> 23/03/2015 </span><span class=\"badge\">2</span>
-            <ol>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"1\" data-checked='1'>
-                    <span> </span><span class=\"glyphicon glyphicon-time\"></span><span> 8:30 - 9:15</span></li>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"2\" data-checked='1'>
-                    <span> </span><span class=\"glyphicon glyphicon-time\"></span><span> 9:15 - 10:00</span></li>
-            </ol>
-        </li>
-        <li class=\"gsn-chkbox-nivel2\" data-iddia=\"20150312\">
-            <span> </span><span class=\"glyphicon glyphicon-remove-circle\"></span><span> 12/03/2015 </span><span class=\"badge\">2</span>
-            <ol>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"1\" data-checked='1'>
-                    <span> </span><span class=\"glyphicon glyphicon-time\"></span><span> 8:30 - 9:15</span></li>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"2\" data-checked='1'>9:15 - 10:00</li>
-            </ol>
-        </li>
-        <li class=\"gsn-chkbox-nivel2\" data-iddia=\"20150319\">
-        <span> </span><span class=\"glyphicon glyphicon-remove-circle\"></span><span> 19/03/2015 </span><span class=\"badge\">2</span>
-            <ol>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"2\" data-checked='1'>9:15 - 10:00</li>
-            </ol>
-        </li>
-    </ol>
-    </li>
-</ol>
-      
-      
-      
-  </div>
-</div>            
-
-        </div>
-            
-<div id=\"col-right\" class=\"col-xs-6\">
-<div id=\"gsn-reservas-registradas\" class=\"gsn-reservas-edicion panel panel-default\">
-  <div class=\"panel-heading\">
-    <h3 class=\"panel-title\">Horas registradas</h3>
-  </div>
-  <div class=\"panel-body\" style=\"overflow-y: scroll; height: 200px;\">
-
-<ol id=\"gsn-lista-reservas-registradas\" class=\"gsn-dragging-reservas\">
-
-        <li class='gsn-chkbox-nivel1 expanded' data-iddep='2'>Basica
-    <ol>
-        <li class=\"gsn-chkbox-nivel2\" data-iddia=\"20150319\">
-            <span> </span><span class=\"glyphicon glyphicon-remove-circle\"></span><span> 19/03/2015 </span><span class=\"badge\">2</span>
-            <ol>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"3\" data-checked='1'>10:20 - 10:55</li>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"4\" data-checked='1'>10:55 - 11:50</li>
-            </ol>
-        </li>
-        <li class=\"gsn-chkbox-nivel2\" data-iddia=\"20150323\">
-        <span> </span><span class=\"glyphicon glyphicon-remove-circle\"></span><span> 23/03/2015 </span><span class=\"badge\">2</span>
-            <ol>
-                <li class=\"gsn-chkbox-nivel3\" data-idbloque=\"2\" data-checked='1'>9:15 - 10:00</li>
-            </ol>
-        </li>
-    </ol>
-    </li>
-    
-    
-</ol> 
-      
-  
-      
-      
-      
-      
- 
-      
-      
-      
-      
-      
-      
-  </div>    
-      
-  </div>
-</div>              
-            
-        </div>  
-            
-            
-       
-            
-           <style>
-               
-               .bonsai,
-.bonsai li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow: hidden;
-  min-width: 200px !important;
-  
-}
-.bonsai label {
-    margin-bottom:0 !important;
-}
-
-.bonsai li {
-  position: relative;
-  padding-left: 1.3em; /* padding for the thumb */
-}
-
-li .thumb {
-  margin: -1px 0 0 -1em; /* negative margin into the padding of the li */
-  position: absolute;
-  cursor: pointer;
-}
-
-li.has-children > .thumb:after {
-  content: '▸';
-}
-
-li.has-children.expanded > .thumb:after {
-  content: '▾';
-}
-
-li.collapsed > ol.bonsai {
-  height: 0;
-  overflow: hidden;
-}
-
-.bonsai .all,
-.bonsai .none {
-  cursor: pointer;
-}
-               
-               
-           </style>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-
-            
-            
-            
-            
-            
-            
-         
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-        </div>
-
-  </div>
-
-</div>   
-          
-          
-          
-          
-          
-          
-          
+    </script>
+        
+</div>          
           
           
           
@@ -817,6 +378,6 @@ li.collapsed > ol.bonsai {
 
     public function getDebugInfo()
     {
-        return array (  304 => 247,  300 => 228,  176 => 80,  172 => 79,  165 => 75,  161 => 74,  157 => 73,  150 => 69,  146 => 68,  142 => 67,  134 => 62,  130 => 61,  126 => 60,  119 => 56,  115 => 55,  111 => 54,  104 => 50,  100 => 49,  96 => 48,  89 => 44,  85 => 43,  80 => 42,  74 => 38,  70 => 37,  45 => 14,  42 => 12,  39 => 10,  35 => 7,  29 => 6,  25 => 4,  23 => 3,  20 => 1,);
+        return array (  154 => 60,  150 => 59,  143 => 57,  139 => 55,  131 => 53,  122 => 50,  119 => 49,  117 => 48,  114 => 47,  106 => 46,  103 => 45,  101 => 44,  98 => 43,  90 => 41,  81 => 38,  78 => 37,  76 => 36,  68 => 34,  61 => 31,  34 => 6,  28 => 5,  23 => 3,  20 => 1,);
     }
 }

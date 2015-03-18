@@ -6,7 +6,8 @@ namespace Cosaco\GesenBundle\Controller;
 
 use Cosaco\GesenBundle\Entity\Reserva;
 use Cosaco\GesenBundle\Entity\ReservaDia;
-use Cosaco\GesenBundle\Form\HorarioReservaType;
+use Cosaco\GesenBundle\Entity\ReservaHora;
+use Cosaco\GesenBundle\Form\Type\HorarioReservaType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -53,7 +54,9 @@ class HorarioController extends Controller
                      
         // Valor por defecto para las fechas que no se indiquen
         if($fecha==null) {
-            $fecha=time();
+            $dia=date('Y-m-d');
+            $fecha=  strtotime($dia);
+            //$fecha=time();
         } else {
         
             if(!Fecha::is_timestamp($fecha)) {
@@ -158,7 +161,7 @@ class HorarioController extends Controller
             'method' => 'POST',
         ));
 
-    //    $form->add('submit', 'submit', array('label' => 'Create'));
+      //  $form->add('submit', 'submit', array('label' => '<span>Guardar</span>'));
 
         return $form;
     }
@@ -173,6 +176,9 @@ class HorarioController extends Controller
        
         $entity = new Reserva();
         $dia = new ReservaDia();
+//        $hora = new ReservaHora();
+//        
+//        $dia->getHoras()->add($hora);
         
         $entity->getDias()->add($dia);
 
@@ -187,30 +193,29 @@ class HorarioController extends Controller
     public function crearAction(Request $request)
     {
         $entity = new Reserva();
-
-        $form   = $this->createCreateForm($entity);
-        
-        $form->bind($request);
                 
         $entity->setUsuario($this->getUser());
 
-     //   $entity->setTipoReserva('Curricular');
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
         
         if($form->isValid()) 
         {
-            $response['saludo'] = 'hola';
-        }
-        else
-        {
-            $response['saludo'] = $form->getErrorsAsString();
-        }
-  
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
+            
+            $response['saludo'] = 'hola';
+                   return new JsonResponse($response);
+        }
         
-        return new JsonResponse($response);
+        return $this->render('CosacoGesenBundle:Horario:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+        
+ 
         
     }
 }

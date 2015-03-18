@@ -1,0 +1,30 @@
+reservas_hora:
+    path:     /
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:index" }
+
+reservas_hora_show:
+    path:     /{id}/show
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:show" }
+
+reservas_hora_new:
+    path:     /new
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:new" }
+
+reservas_hora_create:
+    path:     /create
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:create" }
+    requirements: { _method: post }
+
+reservas_hora_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:edit" }
+
+reservas_hora_update:
+    path:     /{id}/update
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:update" }
+    requirements: { _method: post|put }
+
+reservas_hora_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CosacoGesenBundle:ReservaHora:delete" }
+    requirements: { _method: post|delete }

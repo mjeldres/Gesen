@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
-{% block body %}  
+{% block body %}
+<div id="header">
     <nav id="gsn-nav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -58,8 +59,10 @@
               </ul>
             </div><!-- /.navbar-collapse --> 
         </div>
-    </nav>
-    <div class="container-fluid">
+    </nav>                       
+</div>   
+<div id="body">
+    <div class="container-fluid"> 
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <div class="gesen-logo">
@@ -82,7 +85,10 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">   
         <!-- bloque contenido -->{% block cont_derecha %}
 {% endblock %}
-        </div>      
+        </div> 
+    </div>
+</div>
+        
     {{ dump(app.user) }}
 {% endblock %}
     

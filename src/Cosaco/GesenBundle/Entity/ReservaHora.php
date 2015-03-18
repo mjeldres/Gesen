@@ -74,19 +74,6 @@ class ReservaHora
     }
 
     /**
-     * Set fechaActualizacion
-     *
-     * @param \DateTime $fechaActualizacion
-     * @return ReservaHora
-     */
-    public function setFechaActualizacion($fechaActualizacion)
-    {
-        $this->fechaActualizacion = $fechaActualizacion;
-
-        return $this;
-    }
-
-    /**
      * Get fechaActualizacion
      *
      * @return \DateTime 

@@ -108,4 +108,8 @@ class Horario
     {
         return $this->bloqueId;
     }
+    
+    public function __toString() {
+        return $this->horaInicio->format('H:i:s') . ' - ' . $this->horaTermino->format('H:i:s');
+    }
 }

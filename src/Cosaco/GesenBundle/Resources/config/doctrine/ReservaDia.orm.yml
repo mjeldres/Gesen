@@ -40,6 +40,11 @@ Cosaco\GesenBundle\Entity\ReservaDia:
             nullable: true
             comment: 'Fecha de ingreso a la reserva del día actual.'
             column: fecha_actualizacion
+    oneToMany:
+        horas:
+            targetEntity: ReservaHora
+            cascade: ['persist', 'remove']
+            mappedBy: reservaDia        
     manyToOne:
         reserva:
             targetEntity: Reserva

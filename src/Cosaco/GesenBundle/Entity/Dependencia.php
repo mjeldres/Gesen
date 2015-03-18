@@ -220,4 +220,8 @@ class Dependencia
     {
         return $this->habilitadoMantencion;
     }
+    
+    public function __toString() {
+        return $this->nombre;
+    }
 }

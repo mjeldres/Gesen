@@ -59,9 +59,9 @@ Cosaco\GesenBundle\Entity\ReservaHora:
             orphanRemoval: false
         reservaDia:
             targetEntity: ReservaDia
-            cascade: {  }
+            cascade: ['persist']
             mappedBy: null
-            inversedBy: null
+            inversedBy: horas
             joinColumns:
                 reserva_dia_id:
                     referencedColumnName: id

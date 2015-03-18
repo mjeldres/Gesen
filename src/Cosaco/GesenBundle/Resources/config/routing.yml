@@ -1,3 +1,7 @@
+cosaco_gesen_reservas_hora:
+    resource: "@CosacoGesenBundle/Resources/config/routing/reservahora.yml"
+    prefix:   /reservas_hora
+
 cosaco_gesen_reservas_dia:
     resource: "@CosacoGesenBundle/Resources/config/routing/reservadia.yml"
     prefix:   /reservas_dia

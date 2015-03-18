@@ -722,8 +722,10 @@
                     /*
                      * Fix para firefox que no retorna correctamente el ev.clientX hasta mover el mouse
                      * (Math.floor(((ev.clientX-$(ev.target).offset().left)/anchoCol))+1)
+                     * Update2: firefox-> se desplaza el cuadro en un dia, se elimina el incremento +1
+                     * (Math.floor(((ev.clientX-$(ev.target).offset().left)/anchoCol)))
                      */
-                    var col=(ev.offsetX)? (Math.floor((ev.offsetX/anchoCol))+1):(Math.floor(((ev.clientX-$(ev.target).offset().left)/anchoCol))+1);
+                    var col=(ev.offsetX)? (Math.floor((ev.offsetX/anchoCol))+1):(Math.round(((ev.clientX-$(ev.target).offset().left)/anchoCol)));
                     var binicio=$(objCont).closest("tr").index()+1;
 
                     // Compruebo que el bloque seleccionado no se encuentre registrado
@@ -825,35 +827,7 @@
     }
     
     
-    $.fn.nuevaReserva=function(){
-        
-        var objCont=$('#detalleReserva .modal-body');
-        
-        objCont.data('id', $(this).data('id'));
-        
-        
-            $('#detalleReserva .modal-body>*').remove();
-            $('#detalleReserva .modal-body').loaderAjax(true);
-            $('#detalleReserva').modal('show');
-                   
-            var url=obtenerRuta('nueva_reserva');
-            
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "html",
-                success: function(data) {
-                   
-                    $('#detalleReserva .modal-body').loaderAjax(false);
-                    $('#detalleReserva .modal-body').append($(data));  
 
-                }
-            });
-            
-            
-          //  return false;
- 
-    }
 
     // fix margen derecho del header con scrollbar
     var ajustarScrollbar=function(){
@@ -883,7 +857,7 @@
             var diaSem=primerDiaSem.day(i+1);
             var textCol=capitalizarStr(diaSem.format('ddd D').replace('.',''));
             $(contenedorDias[i]).text(textCol);
-            $(contenedorDias[i]).data('fechaCol', diaSem.format('x'));
+            $(contenedorDias[i]).data('fechaCol', diaSem.format('X'));
         }
         
         // Seteamos fecha por defecto en el dtp
